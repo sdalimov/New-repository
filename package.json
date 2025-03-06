@@ -1,0 +1,13 @@
+{
+  "name": "math-game-server",
+  "version": "1.0.0",
+  "main": "leaderboard_server.js",
+  "scripts": {
+    "start": "node leaderboard_server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "fs": "0.0.1-security"
+  }
+}
