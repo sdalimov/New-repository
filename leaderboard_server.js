@@ -55,7 +55,7 @@ app.post("/submit-score", (req, res) => {
     res.json({ message: "Результат сохранен" });
 });
 
-// Запуск сервера на 0.0.0.0 для работы на Render
+// Запуск сервера на 0.0.0.0 для Render
 app.listen(PORT, "0.0.0.0", () => {
     console.log(`Сервер запущен на порту ${PORT}`);
 });
