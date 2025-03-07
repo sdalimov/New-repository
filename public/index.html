@@ -136,28 +136,35 @@
         document.getElementById("answerInput").value = "";
     }
 
-    document.getElementById("keypad").addEventListener("click", (event) => {
-        if (event.target.classList.contains("keypad-button")) {
-            let value = event.target.textContent;
-            if (value === "DEL") {
-                document.getElementById("answerInput").value = "";
-            } else if (value === "✔") {
-                checkAnswer();
-            } else {
-                document.getElementById("answerInput").value += value;
-            }
-        }
-    });
-
     function checkAnswer() {
         let userAnswer = document.getElementById("answerInput").value.trim();
         if (userAnswer === levels[currentLevel].answer) {
             score += 10;
             currentLevel++;
-            nextQuestion();
+            if (currentLevel >= levels.length) {
+                saveScore(score);
+            } else {
+                nextQuestion();
+            }
         } else {
             saveScore(score);
         }
+    }
+
+    function saveScore(score) {
+        fetch(`${SERVER_URL}/submit-score`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: userName, score: score })
+        })
+        .then(response => response.json())
+        .then(() => {
+            document.getElementById("game-container").style.display = "none";
+            document.getElementById("startButton").style.display = "block";
+            document.getElementById("leaderboardButton").style.display = "block";
+            alert(`Игра окончена! Ваш счет: ${score}`);
+        })
+        .catch(error => console.error("Ошибка сохранения результата:", error));
     }
     </script>
 </body>
