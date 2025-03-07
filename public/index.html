@@ -38,6 +38,12 @@
     let score = 0;
     let attempts = 3; // Daily limit
     const SERVER_URL = "https://math-game-server.onrender.com";
+    let userName = "Игрок"; // Имя по умолчанию
+
+    // Проверяем, есть ли имя пользователя из Telegram WebApp
+    if (window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
+        userName = window.Telegram.WebApp.initDataUnsafe.user.first_name;
+    }
 
     function startGame() {
         if (attempts <= 0) {
@@ -68,12 +74,6 @@
     }
 
     function saveScore(score) {
-        const userName = prompt("Введите ваше имя для таблицы лидеров:");
-        if (!userName) {
-            alert("Имя не может быть пустым!");
-            return;
-        }
-
         fetch(`${SERVER_URL}/submit-score`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
