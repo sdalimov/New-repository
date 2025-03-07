@@ -90,7 +90,7 @@
             <button class="keypad-button">9</button>
             <button class="keypad-button delete" id="delete">DEL</button>
             <button class="keypad-button">0</button>
-            <button class="keypad-button special" id="submitAnswer">ANSWER</button>
+            <button class="keypad-button special" id="submitAnswer">✔</button>
         </div>
     </div>
     
@@ -110,6 +110,9 @@
     if (window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
         userName = window.Telegram.WebApp.initDataUnsafe.user.first_name;
     }
+
+    document.getElementById("startButton").addEventListener("click", startGame);
+    document.getElementById("submitAnswer").addEventListener("click", checkAnswer);
 
     function startGame() {
         if (attempts <= 0) {
@@ -138,7 +141,7 @@
             let value = event.target.textContent;
             if (value === "DEL") {
                 document.getElementById("answerInput").value = "";
-            } else if (value === "ANSWER") {
+            } else if (value === "✔") {
                 checkAnswer();
             } else {
                 document.getElementById("answerInput").value += value;
