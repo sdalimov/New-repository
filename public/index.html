@@ -21,12 +21,31 @@
             border-radius: 5px;
             margin: 10px;
         }
+        #game-container {
+            margin-top: 20px;
+        }
+        #question {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        #answerInput {
+            font-size: 18px;
+            padding: 10px;
+            width: 80%;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <h1>Математическая Игра</h1>
     <button id="startButton">Начать игру</button>
     <button id="leaderboardButton">Посмотреть таблицу лидеров</button>
+    <div id="game-container" style="display: none;">
+        <p id="question"></p>
+        <input type="text" id="answerInput" placeholder="Введите ответ" autofocus>
+        <button id="submitAnswer">Ответить</button>
+    </div>
+    
     <script>
     const levels = [
         { question: "2 + 2", answer: "4" },
@@ -52,6 +71,8 @@
         }
         currentLevel = 0;
         score = 0;
+        document.getElementById("game-container").style.display = "block";
+        document.getElementById("startButton").style.display = "none";
         nextQuestion();
     }
 
@@ -61,7 +82,13 @@
             saveScore(score);
             return;
         }
-        let userAnswer = prompt(levels[currentLevel].question);
+        document.getElementById("question").textContent = levels[currentLevel].question;
+        document.getElementById("answerInput").value = "";
+        document.getElementById("answerInput").focus();
+    }
+
+    document.getElementById("submitAnswer").addEventListener("click", () => {
+        let userAnswer = document.getElementById("answerInput").value.trim();
         if (userAnswer === levels[currentLevel].answer) {
             score += 10;
             currentLevel++;
@@ -70,8 +97,10 @@
             alert(`Неверно! Игра окончена. Ваш счет: ${score}`);
             saveScore(score);
             attempts--;
+            document.getElementById("game-container").style.display = "none";
+            document.getElementById("startButton").style.display = "block";
         }
-    }
+    });
 
     function saveScore(score) {
         fetch(`${SERVER_URL}/submit-score`, {
