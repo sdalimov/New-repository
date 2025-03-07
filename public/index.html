@@ -56,8 +56,8 @@
             font-size: 18px;
             width: 60px;
             height: 60px;
-            background-color: #ddd;
-            color: black;
+            background-color: #006633;
+            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -65,6 +65,9 @@
         .keypad-button.special {
             background-color: #ff6666;
             color: white;
+        }
+        .keypad-button.delete {
+            background-color: red;
         }
     </style>
 </head>
@@ -85,9 +88,9 @@
             <button class="keypad-button">7</button>
             <button class="keypad-button">8</button>
             <button class="keypad-button">9</button>
-            <button class="keypad-button special" id="delete">DELETE</button>
+            <button class="keypad-button delete" id="delete">DEL</button>
             <button class="keypad-button">0</button>
-            <button class="keypad-button special" id="submitAnswer">ANSWER</button>
+            <button class="keypad-button special" id="submitAnswer">✔</button>
         </div>
     </div>
     
