@@ -38,6 +38,12 @@
             font-weight: bold;
             margin-bottom: 15px;
         }
+        #timer {
+            font-size: 20px;
+            font-weight: bold;
+            color: red;
+            margin-bottom: 10px;
+        }
         #answerInput {
             font-size: 18px;
             padding: 10px;
@@ -76,6 +82,7 @@
     <button id="startButton">Начать игру</button>
     <button id="leaderboardButton">Посмотреть таблицу лидеров</button>
     <div id="game-container" style="display: none;">
+        <p id="timer">00:10</p>
         <p id="question"></p>
         <input type="text" id="answerInput" readonly>
         <div id="keypad">
@@ -90,7 +97,7 @@
             <button class="keypad-button">9</button>
             <button class="keypad-button delete" id="delete">DEL</button>
             <button class="keypad-button">0</button>
-            <button class="keypad-button special" id="submitAnswer">✔</button>
+            <button class="keypad-button special" id="submitAnswer">Ответить</button>
         </div>
     </div>
     
@@ -104,6 +111,7 @@
     let currentLevel = 0;
     let score = 0;
     let attempts = 3;
+    let timer;
     const SERVER_URL = "https://math-game-server.onrender.com";
     let userName = "Игрок";
 
@@ -131,14 +139,29 @@
         }
         document.getElementById("question").textContent = levels[currentLevel].question;
         document.getElementById("answerInput").value = "";
+        startTimer();
+    }
+
+    function startTimer() {
+        let timeLeft = 10;
+        document.getElementById("timer").textContent = `00:${timeLeft < 10 ? '0' + timeLeft : timeLeft}`;
+        clearInterval(timer);
+        timer = setInterval(() => {
+            timeLeft--;
+            document.getElementById("timer").textContent = `00:${timeLeft < 10 ? '0' + timeLeft : timeLeft}`;
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                saveScore(score);
+            }
+        }, 1000);
     }
 
     document.getElementById("keypad").addEventListener("click", (event) => {
         if (event.target.classList.contains("keypad-button")) {
             let value = event.target.textContent;
-            if (value === "DELETE") {
+            if (value === "DEL") {
                 document.getElementById("answerInput").value = "";
-            } else if (value === "ANSWER") {
+            } else if (value === "Ответить") {
                 checkAnswer();
             } else {
                 document.getElementById("answerInput").value += value;
@@ -147,6 +170,7 @@
     });
 
     function checkAnswer() {
+        clearInterval(timer);
         let userAnswer = document.getElementById("answerInput").value.trim();
         if (userAnswer === levels[currentLevel].answer) {
             score += 10;
@@ -156,37 +180,6 @@
             saveScore(score);
         }
     }
-
-    function saveScore(score) {
-        fetch(`${SERVER_URL}/submit-score`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name: userName, score: score })
-        })
-        .then(() => {
-            document.getElementById("game-container").style.display = "none";
-            document.getElementById("startButton").style.display = "block";
-            document.getElementById("leaderboardButton").style.display = "block";
-            alert(`Игра окончена! Ваш счет: ${score}`);
-        })
-        .catch(error => console.error("Ошибка сохранения результата:", error));
-    }
-
-    function showLeaderboard() {
-        fetch(`${SERVER_URL}/leaderboard`)
-        .then(response => response.json())
-        .then(data => {
-            let leaderboardText = "Таблица лидеров:\n";
-            data.forEach((player, index) => {
-                leaderboardText += `${index + 1}. ${player.name} - ${player.score} очков\n`;
-            });
-            alert(leaderboardText);
-        })
-        .catch(error => console.error("Ошибка загрузки таблицы лидеров:", error));
-    }
-
-    document.getElementById("startButton").addEventListener("click", startGame);
-    document.getElementById("leaderboardButton").addEventListener("click", showLeaderboard);
-</script>
+    </script>
 </body>
 </html>
