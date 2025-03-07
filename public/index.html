@@ -93,7 +93,6 @@
 
     function nextQuestion() {
         if (currentLevel >= levels.length) {
-            alert(`Поздравляем! Вы прошли все уровни! Итоговый счет: ${score}`);
             saveScore(score);
             return;
         }
@@ -109,12 +108,7 @@
             currentLevel++;
             nextQuestion();
         } else {
-            alert(`Неверно! Игра окончена. Ваш счет: ${score}`);
             saveScore(score);
-            attempts--;
-            document.getElementById("game-container").style.display = "none";
-            document.getElementById("startButton").style.display = "block";
-            document.getElementById("leaderboardButton").style.display = "block";
         }
     });
 
@@ -125,8 +119,11 @@
             body: JSON.stringify({ name: userName, score: score })
         })
         .then(response => response.json())
-        .then(data => {
-            alert("Результат сохранен!");
+        .then(() => {
+            document.getElementById("game-container").style.display = "none";
+            document.getElementById("startButton").style.display = "block";
+            document.getElementById("leaderboardButton").style.display = "block";
+            alert(`Игра окончена! Ваш счет: ${score}`);
         })
         .catch(error => console.error("Ошибка сохранения результата:", error));
     }
