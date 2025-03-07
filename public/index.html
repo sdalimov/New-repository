@@ -97,7 +97,7 @@
             <button class="keypad-button">9</button>
             <button class="keypad-button delete" id="delete">DEL</button>
             <button class="keypad-button">0</button>
-            <button class="keypad-button special" id="submitAnswer">Ответить</button>
+            <button class="keypad-button special" id="submitAnswer">✔</button>
         </div>
     </div>
     
@@ -161,7 +161,7 @@
             let value = event.target.textContent;
             if (value === "DEL") {
                 document.getElementById("answerInput").value = "";
-            } else if (value === "Ответить") {
+            } else if (value === "✔") {
                 checkAnswer();
             } else {
                 document.getElementById("answerInput").value += value;
