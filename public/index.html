@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Математическая Игра</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Математическая Игра</h1>
+    <button id="startButton">Начать игру</button>
+    <button id="leaderboardButton">Посмотреть таблицу лидеров</button>
+    <script>
+    const levels = [
+        { question: "2 + 2", answer: "4" },
+        { question: "5 × 3", answer: "15" },
+        { question: "12 ÷ 4", answer: "3" },
+    ];
+
+    let currentLevel = 0;
+    let score = 0;
+    let attempts = 3; // Daily limit
+    const SERVER_URL = "https://math-game-server.onrender.com";
+
+    function startGame() {
+        if (attempts <= 0) {
+            alert("Вы использовали все попытки на сегодня!");
+            return;
+        }
+        currentLevel = 0;
+        score = 0;
+        nextQuestion();
+    }
+
+    function nextQuestion() {
+        if (currentLevel >= levels.length) {
+            alert(`Поздравляем! Вы прошли все уровни! Итоговый счет: ${score}`);
+            saveScore(score);
+            return;
+        }
+        let userAnswer = prompt(levels[currentLevel].question);
+        if (userAnswer === levels[currentLevel].answer) {
+            score += 10;
+            currentLevel++;
+            nextQuestion();
+        } else {
+            alert(`Неверно! Игра окончена. Ваш счет: ${score}`);
+            saveScore(score);
+            attempts--;
+        }
+    }
+
+    function saveScore(score) {
+        const userName = prompt("Введите ваше имя для таблицы лидеров:");
+        if (!userName) {
+            alert("Имя не может быть пустым!");
+            return;
+        }
+
+        fetch(`${SERVER_URL}/submit-score`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name: userName, score: score })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("Результат сохранен!");
+        })
+        .catch(error => console.error("Ошибка сохранения результата:", error));
+    }
+
+    function showLeaderboard() {
+        fetch(`${SERVER_URL}/leaderboard`)
+        .then(response => response.json())
+        .then(data => {
+            let leaderboardText = "Таблица лидеров:\n";
+            data.forEach((player, index) => {
+                leaderboardText += `${index + 1}. ${player.name} - ${player.score} очков\n`;
+            });
+            alert(leaderboardText);
+        })
+        .catch(error => console.error("Ошибка загрузки таблицы лидеров:", error));
+    }
+
+    window.onload = function () {
+        document.getElementById("startButton").addEventListener("click", startGame);
+        document.getElementById("leaderboardButton").addEventListener("click", showLeaderboard);
+    };
+</script>
+</body>
+</html>
