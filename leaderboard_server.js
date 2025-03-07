@@ -7,6 +7,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const FILE_PATH = path.join(__dirname, "leaderboard.json");
 
+// Раздаём статические файлы из папки "public"
+app.use(express.static(path.join(__dirname, "public")));
+
 app.use(express.json());
 app.use(cors());
 
@@ -53,6 +56,11 @@ app.post("/submit-score", (req, res) => {
     saveLeaderboard(leaderboard);
 
     res.json({ message: "Результат сохранен" });
+});
+
+// Отдаём главный HTML-файл при заходе на "/"
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 // Запуск сервера на 0.0.0.0 для Render
