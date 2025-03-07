@@ -10,8 +10,8 @@
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 20px;
-            background-color: #ffffff; /* Установлен светлый фон */
-            color: #000000; /* Черный текст для лучшей читаемости */
+            background-color: #ffffff;
+            color: #000000;
         }
         button {
             padding: 10px 20px;
@@ -21,14 +21,14 @@
             color: white;
             border: none;
             border-radius: 5px;
-            margin: 10px;
+            margin: 5px;
         }
         #game-container {
             margin-top: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: #ffffff; /* Светлый фон для игрового поля */
+            background-color: #ffffff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -45,8 +45,26 @@
             text-align: center;
             margin-bottom: 10px;
         }
-        #leaderboardButton {
-            display: block;
+        #keypad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            margin-top: 10px;
+        }
+        .keypad-button {
+            padding: 15px;
+            font-size: 18px;
+            width: 60px;
+            height: 60px;
+            background-color: #ddd;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .keypad-button.special {
+            background-color: #ff6666;
+            color: white;
         }
     </style>
 </head>
@@ -56,8 +74,21 @@
     <button id="leaderboardButton">Посмотреть таблицу лидеров</button>
     <div id="game-container" style="display: none;">
         <p id="question"></p>
-        <input type="text" id="answerInput" placeholder="Введите ответ" autofocus>
-        <button id="submitAnswer">Ответить</button>
+        <input type="text" id="answerInput" readonly>
+        <div id="keypad">
+            <button class="keypad-button">1</button>
+            <button class="keypad-button">2</button>
+            <button class="keypad-button">3</button>
+            <button class="keypad-button">4</button>
+            <button class="keypad-button">5</button>
+            <button class="keypad-button">6</button>
+            <button class="keypad-button">7</button>
+            <button class="keypad-button">8</button>
+            <button class="keypad-button">9</button>
+            <button class="keypad-button special" id="delete">DELETE</button>
+            <button class="keypad-button">0</button>
+            <button class="keypad-button special" id="submitAnswer">ANSWER</button>
+        </div>
     </div>
     
     <script>
@@ -69,11 +100,10 @@
 
     let currentLevel = 0;
     let score = 0;
-    let attempts = 3; // Daily limit
+    let attempts = 3;
     const SERVER_URL = "https://math-game-server.onrender.com";
-    let userName = "Игрок"; // Имя по умолчанию
+    let userName = "Игрок";
 
-    // Проверяем, есть ли имя пользователя из Telegram WebApp
     if (window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
         userName = window.Telegram.WebApp.initDataUnsafe.user.first_name;
     }
@@ -98,10 +128,22 @@
         }
         document.getElementById("question").textContent = levels[currentLevel].question;
         document.getElementById("answerInput").value = "";
-        document.getElementById("answerInput").focus();
     }
 
-    document.getElementById("submitAnswer").addEventListener("click", () => {
+    document.getElementById("keypad").addEventListener("click", (event) => {
+        if (event.target.classList.contains("keypad-button")) {
+            let value = event.target.textContent;
+            if (value === "DELETE") {
+                document.getElementById("answerInput").value = "";
+            } else if (value === "ANSWER") {
+                checkAnswer();
+            } else {
+                document.getElementById("answerInput").value += value;
+            }
+        }
+    });
+
+    function checkAnswer() {
         let userAnswer = document.getElementById("answerInput").value.trim();
         if (userAnswer === levels[currentLevel].answer) {
             score += 10;
@@ -110,7 +152,7 @@
         } else {
             saveScore(score);
         }
-    });
+    }
 
     function saveScore(score) {
         fetch(`${SERVER_URL}/submit-score`, {
@@ -118,7 +160,6 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: userName, score: score })
         })
-        .then(response => response.json())
         .then(() => {
             document.getElementById("game-container").style.display = "none";
             document.getElementById("startButton").style.display = "block";
@@ -141,10 +182,8 @@
         .catch(error => console.error("Ошибка загрузки таблицы лидеров:", error));
     }
 
-    window.onload = function () {
-        document.getElementById("startButton").addEventListener("click", startGame);
-        document.getElementById("leaderboardButton").addEventListener("click", showLeaderboard);
-    };
+    document.getElementById("startButton").addEventListener("click", startGame);
+    document.getElementById("leaderboardButton").addEventListener("click", showLeaderboard);
 </script>
 </body>
 </html>
