@@ -38,12 +38,6 @@
             font-weight: bold;
             margin-bottom: 15px;
         }
-        #timer {
-            font-size: 20px;
-            font-weight: bold;
-            color: red;
-            margin-bottom: 10px;
-        }
         #answerInput {
             font-size: 18px;
             padding: 10px;
@@ -82,7 +76,6 @@
     <button id="startButton">Начать игру</button>
     <button id="leaderboardButton">Посмотреть таблицу лидеров</button>
     <div id="game-container" style="display: none;">
-        <p id="timer">00:10</p>
         <p id="question"></p>
         <input type="text" id="answerInput" readonly>
         <div id="keypad">
@@ -97,7 +90,7 @@
             <button class="keypad-button">9</button>
             <button class="keypad-button delete" id="delete">DEL</button>
             <button class="keypad-button">0</button>
-            <button class="keypad-button special" id="submitAnswer">✔</button>
+            <button class="keypad-button special" id="submitAnswer">ANSWER</button>
         </div>
     </div>
     
@@ -111,7 +104,6 @@
     let currentLevel = 0;
     let score = 0;
     let attempts = 3;
-    let timer;
     const SERVER_URL = "https://math-game-server.onrender.com";
     let userName = "Игрок";
 
@@ -139,21 +131,6 @@
         }
         document.getElementById("question").textContent = levels[currentLevel].question;
         document.getElementById("answerInput").value = "";
-        startTimer();
-    }
-
-    function startTimer() {
-        let timeLeft = 10;
-        document.getElementById("timer").textContent = `00:${timeLeft < 10 ? '0' + timeLeft : timeLeft}`;
-        clearInterval(timer);
-        timer = setInterval(() => {
-            timeLeft--;
-            document.getElementById("timer").textContent = `00:${timeLeft < 10 ? '0' + timeLeft : timeLeft}`;
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                saveScore(score);
-            }
-        }, 1000);
     }
 
     document.getElementById("keypad").addEventListener("click", (event) => {
@@ -161,7 +138,7 @@
             let value = event.target.textContent;
             if (value === "DEL") {
                 document.getElementById("answerInput").value = "";
-            } else if (value === "✔") {
+            } else if (value === "ANSWER") {
                 checkAnswer();
             } else {
                 document.getElementById("answerInput").value += value;
@@ -170,7 +147,6 @@
     });
 
     function checkAnswer() {
-        clearInterval(timer);
         let userAnswer = document.getElementById("answerInput").value.trim();
         if (userAnswer === levels[currentLevel].answer) {
             score += 10;
