@@ -95,6 +95,23 @@ app.get('/register', async (req, res) => {
     }
 });
 
+// Новый маршрут для таблицы лидеров
+app.get('/leaderboard', async (req, res) => {
+    try {
+        const leaderboard = await db.collection('users')
+            .find()
+            .sort({ score: -1 }) // Сортировка по убыванию очков
+            .limit(10) // Ограничение до 10 лидеров
+            .toArray();
+        res.json(leaderboard.map(user => ({
+            userName: user.userName,
+            score: user.score
+        })));
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
