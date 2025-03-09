@@ -146,8 +146,9 @@
 
     function checkAnswer() {
         let userAnswer = document.getElementById("answerInput").value.trim();
+        
+        // Если поле пустое, просто ничего не делаем
         if (!userAnswer) {
-            alert("Введите ответ!");
             return;
         }
         
@@ -165,7 +166,6 @@
             if (attempts <= 0) {
                 endGame();
             } else {
-                alert(`Неверный ответ! Осталось попыток: ${attempts}`);
                 document.getElementById("answerInput").value = "";
             }
         }
