@@ -68,6 +68,10 @@
         .keypad-button.ok {
             background-color: #0088cc;
         }
+        #attemptsLeft {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -75,6 +79,7 @@
     <button id="startButton">Начать игру</button>
     <button id="leaderboardButton">Посмотреть таблицу лидеров</button>
     <div id="game-container" style="display: none;">
+        <p id="attemptsLeft">Осталось попыток: <span id="attemptsCount">3</span></p>
         <p id="question"></p>
         <input type="text" id="answerInput" readonly>
         <div id="keypad">
@@ -113,6 +118,7 @@
     document.getElementById("startButton").addEventListener("click", startGame);
     document.getElementById("submitAnswer").addEventListener("click", checkAnswer);
     document.getElementById("keypad").addEventListener("click", handleKeypadInput);
+    document.getElementById("leaderboardButton").addEventListener("click", showLeaderboard);
 
     function startGame() {
         if (attempts <= 0) {
@@ -121,10 +127,12 @@
         }
         currentLevel = 0;
         score = 0;
+        document.getElementById("answerInput").value = "";
         document.getElementById("game-container").style.display = "flex";
         document.getElementById("startButton").style.display = "none";
         document.getElementById("leaderboardButton").style.display = "none";
         nextQuestion();
+        updateAttemptsDisplay();
     }
 
     function nextQuestion() {
@@ -138,6 +146,10 @@
 
     function checkAnswer() {
         let userAnswer = document.getElementById("answerInput").value.trim();
+        if (!userAnswer) {
+            alert("Введите ответ!");
+            return;
+        }
         if (userAnswer === levels[currentLevel].answer) {
             score += 10;
             currentLevel++;
@@ -147,6 +159,7 @@
             }
             nextQuestion();
         } else {
+            attempts--;
             endGame();
         }
     }
@@ -157,6 +170,7 @@
         document.getElementById("game-container").style.display = "none";
         document.getElementById("startButton").style.display = "block";
         document.getElementById("leaderboardButton").style.display = "block";
+        updateAttemptsDisplay();
     }
 
     function handleKeypadInput(event) {
@@ -169,6 +183,30 @@
         } else {
             document.getElementById("answerInput").value += value;
         }
+    }
+
+    function saveScore(score) {
+        fetch(`${SERVER_URL}/save-score`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userName, score })
+        })
+        .then(response => response.json())
+        .then(data => console.log('Score saved:', data))
+        .catch(error => console.error('Error saving score:', error));
+    }
+
+    function showLeaderboard() {
+        fetch(`${SERVER_URL}/leaderboard`)
+            .then(response => response.json())
+            .then(data => {
+                alert("Таблица лидеров:\n" + JSON.stringify(data, null, 2));
+            })
+            .catch(error => console.error('Error fetching leaderboard:', error));
+    }
+
+    function updateAttemptsDisplay() {
+        document.getElementById("attemptsCount").textContent = attempts;
     }
     </script>
 </body>
