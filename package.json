@@ -6,8 +6,21 @@
     "start": "node leaderboard_server.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
     "cors": "^2.8.5",
-    "fs": "0.0.1-security"
-  }
+    "express": "^4.21.2",
+    "fs": "0.0.1-security",
+    "mongodb": "^6.14.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sdalimov/New-repository.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sdalimov/New-repository/issues"
+  },
+  "homepage": "https://github.com/sdalimov/New-repository#readme",
+  "description": ""
 }
