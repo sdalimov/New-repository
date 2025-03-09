@@ -12,6 +12,8 @@
             padding: 20px;
             background-color: #ffffff;
             color: #000000;
+            margin: 0;
+            position: relative;
         }
         button {
             padding: 10px 20px;
@@ -72,9 +74,18 @@
             font-size: 18px;
             margin-bottom: 10px;
         }
+        #scoreDisplay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #0088cc;
+        }
     </style>
 </head>
 <body>
+    <div id="scoreDisplay">Счёт: <span id="scoreCount">0</span></div>
     <h1>Математическая Игра</h1>
     <button id="startButton">Начать игру</button>
     <button id="leaderboardButton">Посмотреть таблицу лидеров</button>
@@ -103,6 +114,13 @@
         { question: "2 + 2", answer: "4" },
         { question: "5 × 3", answer: "15" },
         { question: "12 ÷ 4", answer: "3" },
+        { question: "6 + 7", answer: "13" },
+        { question: "4 × 5", answer: "20" },
+        { question: "15 - 8", answer: "7" },
+        { question: "9 ÷ 3", answer: "3" },
+        { question: "8 + 4", answer: "12" },
+        { question: "3 × 6", answer: "18" },
+        { question: "10 - 2", answer: "8" }
     ];
 
     let currentLevel = 0;
@@ -127,6 +145,7 @@
         }
         currentLevel = 0;
         score = 0;
+        updateScoreDisplay();
         document.getElementById("answerInput").value = "";
         document.getElementById("game-container").style.display = "flex";
         document.getElementById("startButton").style.display = "none";
@@ -147,13 +166,13 @@
     function checkAnswer() {
         let userAnswer = document.getElementById("answerInput").value.trim();
         
-        // Если поле пустое, просто ничего не делаем
         if (!userAnswer) {
             return;
         }
         
         if (userAnswer === levels[currentLevel].answer) {
             score += 10;
+            updateScoreDisplay();
             currentLevel++;
             if (currentLevel >= levels.length) {
                 endGame();
@@ -217,6 +236,10 @@
 
     function updateAttemptsDisplay() {
         document.getElementById("attemptsCount").textContent = attempts;
+    }
+
+    function updateScoreDisplay() {
+        document.getElementById("scoreCount").textContent = score;
     }
     </script>
 </body>
