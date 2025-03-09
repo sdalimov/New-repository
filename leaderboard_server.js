@@ -1,69 +1,68 @@
-const express = require("express");
-const fs = require("fs");
-const cors = require("cors");
-const path = require("path");
+const express = require('express');
+const { MongoClient } = require('mongodb');
+const cors = require('cors');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const FILE_PATH = path.join(__dirname, "leaderboard.json");
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/mathgame';
 
-// Раздаём статические файлы из папки "public"
-app.use(express.static(path.join(__dirname, "public")));
+let db;
 
 app.use(express.json());
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Загружаем таблицу лидеров
-function loadLeaderboard() {
-    if (!fs.existsSync(FILE_PATH)) {
-        return [];
-    }
+async function connectToMongo() {
+    const client = new MongoClient(MONGO_URI);
     try {
-        const data = fs.readFileSync(FILE_PATH, "utf-8");
-        return JSON.parse(data);
-    } catch (err) {
-        console.error("Ошибка чтения файла:", err);
-        return [];
+        await client.connect();
+        db = client.db('mathgame');
+        console.log('Connected to MongoDB');
+    } catch (error) {
+        console.error('MongoDB connection error:', error);
     }
 }
 
-// Сохраняем таблицу лидеров
-function saveLeaderboard(leaderboard) {
+connectToMongo();
+
+app.post('/save-score', async (req, res) => {
+    const { userName, score, userId } = req.body;
+    if (!userName || typeof score !== 'number') {
+        return res.status(400).json({ message: 'Неверные данные' });
+    }
     try {
-        fs.writeFileSync(FILE_PATH, JSON.stringify(leaderboard, null, 2), "utf-8");
-    } catch (err) {
-        console.error("Ошибка записи файла:", err);
+        const user = await db.collection('users').findOneAndUpdate(
+            { userId },
+            { $set: { userName, score, updatedAt: new Date() } },
+            { upsert: true, returnDocument: 'after' }
+        );
+        res.json({ success: true, user: user.value });
+    } catch (error) {
+        res.status(500).json({ message: 'Ошибка сервера' });
     }
-}
-
-// Получение таблицы лидеров (ТОП-10)
-app.get("/leaderboard", (req, res) => {
-    const leaderboard = loadLeaderboard();
-    leaderboard.sort((a, b) => b.score - a.score); // Сортировка по очкам
-    res.json(leaderboard.slice(0, 10));
 });
 
-// Отправка нового результата
-app.post("/submit-score", (req, res) => {
-    const { name, score } = req.body;
-
-    if (!name || typeof score !== "number") {
-        return res.status(400).json({ message: "Неверные данные" });
+app.get('/leaderboard', async (req, res) => {
+    try {
+        const leaderboard = await db.collection('users')
+            .find()
+            .sort({ score: -1 })
+            .limit(10)
+            .toArray();
+        res.json(leaderboard.map(user => ({
+            userName: user.userName,
+            score: user.score
+        })));
+    } catch (error) {
+        res.status(500).json({ message: 'Ошибка сервера' });
     }
-
-    const leaderboard = loadLeaderboard();
-    leaderboard.push({ name, score });
-    saveLeaderboard(leaderboard);
-
-    res.json({ message: "Результат сохранен" });
 });
 
-// Отдаём главный HTML-файл при заходе на "/"
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "index.html"));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Запуск сервера на 0.0.0.0 для Render
-app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Сервер запущен на порту ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on port ${PORT}`);
 });
