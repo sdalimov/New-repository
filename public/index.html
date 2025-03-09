@@ -143,9 +143,9 @@
             currentLevel++;
             if (currentLevel >= levels.length) {
                 saveScore(score);
-            } else {
-                nextQuestion();
+                return;
             }
+            nextQuestion();
         } else {
             saveScore(score);
         }
