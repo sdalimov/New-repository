@@ -150,23 +150,33 @@
             alert("Введите ответ!");
             return;
         }
+        
         if (userAnswer === levels[currentLevel].answer) {
             score += 10;
             currentLevel++;
             if (currentLevel >= levels.length) {
                 endGame();
-                return;
+            } else {
+                nextQuestion();
             }
-            nextQuestion();
         } else {
             attempts--;
-            endGame();
+            updateAttemptsDisplay();
+            if (attempts <= 0) {
+                endGame();
+            } else {
+                alert(`Неверный ответ! Осталось попыток: ${attempts}`);
+                document.getElementById("answerInput").value = "";
+            }
         }
     }
 
     function endGame() {
         saveScore(score);
-        alert(`Игра окончена! Ваш счёт: ${score}`);
+        let message = attempts <= 0 ? 
+            `Игра окончена! Попытки закончились. Ваш счёт: ${score}` : 
+            `Поздравляем! Вы прошли все уровни! Ваш счёт: ${score}`;
+        alert(message);
         document.getElementById("game-container").style.display = "none";
         document.getElementById("startButton").style.display = "block";
         document.getElementById("leaderboardButton").style.display = "block";
