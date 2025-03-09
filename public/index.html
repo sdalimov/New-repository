@@ -129,7 +129,7 @@
 
     function nextQuestion() {
         if (currentLevel >= levels.length) {
-            saveScore(score);
+            endGame();
             return;
         }
         document.getElementById("question").textContent = levels[currentLevel].question;
@@ -142,13 +142,21 @@
             score += 10;
             currentLevel++;
             if (currentLevel >= levels.length) {
-                saveScore(score);
+                endGame();
                 return;
             }
             nextQuestion();
         } else {
-            saveScore(score);
+            endGame();
         }
+    }
+
+    function endGame() {
+        saveScore(score);
+        alert(`Игра окончена! Ваш счёт: ${score}`);
+        document.getElementById("game-container").style.display = "none";
+        document.getElementById("startButton").style.display = "block";
+        document.getElementById("leaderboardButton").style.display = "block";
     }
 
     function handleKeypadInput(event) {
