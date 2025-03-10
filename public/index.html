@@ -316,18 +316,22 @@
     }
 
     function showLeaderboard() {
-        fetch(`${SERVER_URL}/leaderboard`)
-            .then(response => response.json())
-            .then(data => {
-                alert("Таблица лидеров:\n" + JSON.stringify(data, null, 2));
-            })
-            .catch(error => console.error('Error fetching leaderboard:', error));
-    }
-
-    function updateAttemptsDisplay() {
-        document.getElementById("attemptsCount").textContent = attempts;
-    }
-
+    fetch(`${SERVER_URL}/leaderboard`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.length === 0) {
+                alert("Таблица лидеров пуста.");
+                return;
+            }
+            const leaderboardText = data
+                .map((entry, index) => `${index + 1}. ${entry.userName} - ${entry.score} баллов`)
+                .join("\n");
+            alert("Таблица лидеров:\n" + leaderboardText);
+        })
+        .catch(error => {
+            console.error('Error fetching leaderboard:', error);
+            alert("Ошибка при загрузке таблицы лидеров.");
+        })
     function updateScoreDisplay() {
         document.getElementById("scoreCount").textContent = score;
     }
