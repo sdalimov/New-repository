@@ -128,107 +128,83 @@
     </div>
     
     <script>
-    const levels = [
-        { question: "2 + 2", answer: "4" },
-        { question: "5 × 3", answer: "15" },
-        { question: "12 ÷ 4", answer: "3" },
-        { question: "6 + 7", answer: "13" },
-        { question: "4 × 5", answer: "20" },
-        { question: "15 - 8", answer: "7" },
-        { question: "9 ÷ 3", answer: "3" },
-        { question: "8 + 4", answer: "12" },
-        { question: "3 × 6", answer: "18" },
-        { question: "10 - 2", answer: "8" }
-    ];
+        console.log("Script loaded"); // Отладка: проверяем загрузку скрипта
 
-    let currentLevel = 0;
-    let score = 0;
-    let attempts = 3;
-    let timer;
-    let timeLeft = 10;
-    const SERVER_URL = "https://math-game-server.onrender.com"; // Обновлено здесь
-    let userName = "Игрок";
-    let userId = null;
-    const MINI_APP_URL = "http://t.me/FastSATbot/SATmathtest";
+        const levels = [
+            { question: "2 + 2", answer: "4" },
+            { question: "5 × 3", answer: "15" },
+            { question: "12 ÷ 4", answer: "3" },
+            { question: "6 + 7", answer: "13" },
+            { question: "4 × 5", answer: "20" },
+            { question: "15 - 8", answer: "7" },
+            { question: "9 ÷ 3", answer: "3" },
+            { question: "8 + 4", answer: "12" },
+            { question: "3 × 6", answer: "18" },
+            { question: "10 - 2", answer: "8" }
+        ];
 
-    if (window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
-        userName = window.Telegram.WebApp.initDataUnsafe.user.first_name;
-        userId = window.Telegram.WebApp.initDataUnsafe.user.id; // Получаем Telegram ID пользователя
-    }
+        let currentLevel = 0;
+        let score = 0;
+        let attempts = 3;
+        let timer;
+        let timeLeft = 10;
+        const SERVER_URL = "https://math-game-server.onrender.com";
+        let userName = "Игрок";
+        let userId = null;
+        const MINI_APP_URL = "http://t.me/FastSATbot/SATmathtest";
 
-    document.getElementById("startButton").addEventListener("click", startGame);
-    document.getElementById("submitAnswer").addEventListener("click", checkAnswer);
-    document.getElementById("keypad").addEventListener("click", handleKeypadInput);
-    document.getElementById("leaderboardButton").addEventListener("click", showLeaderboard);
-    document.getElementById("shareButton").addEventListener("click", shareResult);
-    document.getElementById("inviteButton").addEventListener("click", inviteFriend);
-
-    function startGame() {
-        if (attempts <= 0) {
-            alert("Вы использовали все попытки на сегодня!");
-            return;
+        // Инициализация данных из Telegram
+        if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
+            userName = window.Telegram.WebApp.initDataUnsafe.user.first_name || "Игрок";
+            userId = window.Telegram.WebApp.initDataUnsafe.user.id || null;
         }
-        currentLevel = 0;
-        score = 0;
-        updateScoreDisplay();
-        document.getElementById("answerInput").value = "";
-        document.getElementById("game-container").style.display = "flex";
-        document.getElementById("startButton").style.display = "none";
-        document.getElementById("leaderboardButton").style.display = "none";
-        document.getElementById("shareButton").style.display = "none";
-        document.getElementById("inviteButton").style.display = "none";
-        nextQuestion();
-        updateAttemptsDisplay();
-    }
 
-    function nextQuestion() {
-        if (currentLevel >= levels.length) {
-            endGame();
-            return;
-        }
-        document.getElementById("question").textContent = levels[currentLevel].question;
-        document.getElementById("answerInput").value = "";
-        startTimer();
-    }
-
-    function checkAnswer() {
-        let userAnswer = document.getElementById("answerInput").value.trim();
-        
-        if (!userAnswer) {
-            return;
-        }
-        
-        clearInterval(timer);
-        if (userAnswer === levels[currentLevel].answer) {
-            score += 10;
+        // Функции
+        function startGame() {
+            console.log("Start button clicked"); // Отладка
+            if (attempts <= 0) {
+                alert("Вы использовали все попытки на сегодня!");
+                return;
+            }
+            currentLevel = 0;
+            score = 0;
             updateScoreDisplay();
-            currentLevel++;
+            document.getElementById("answerInput").value = "";
+            document.getElementById("game-container").style.display = "flex";
+            document.getElementById("startButton").style.display = "none";
+            document.getElementById("leaderboardButton").style.display = "none";
+            document.getElementById("shareButton").style.display = "none";
+            document.getElementById("inviteButton").style.display = "none";
+            nextQuestion();
+            updateAttemptsDisplay();
+        }
+
+        function nextQuestion() {
             if (currentLevel >= levels.length) {
                 endGame();
-            } else {
-                nextQuestion();
+                return;
             }
-        } else {
-            attempts--;
-            updateAttemptsDisplay();
-            if (attempts <= 0) {
-                endGame();
-            } else {
-                document.getElementById("answerInput").value = "";
-                nextQuestion();
-            }
+            document.getElementById("question").textContent = levels[currentLevel].question;
+            document.getElementById("answerInput").value = "";
+            startTimer();
         }
-    }
 
-    function startTimer() {
-        timeLeft = 10;
-        updateTimerDisplay();
-        clearInterval(timer);
-        timer = setInterval(() => {
-            timeLeft--;
-            updateTimerDisplay();
-            if (timeLeft <= 0) {
-                clearInterval(timer);
+        function checkAnswer() {
+            console.log("Submit answer clicked"); // Отладка
+            let userAnswer = document.getElementById("answerInput").value.trim();
+            if (!userAnswer) return;
+            
+            clearInterval(timer);
+            if (userAnswer === levels[currentLevel].answer) {
+                score += 10;
+                updateScoreDisplay();
+                currentLevel++;
+                if (currentLevel >= levels.length) {
+                    endGame();
+                } else {
+                    nextQuestion();
+                }
+            } else {
                 attempts--;
                 updateAttemptsDisplay();
                 if (attempts <= 0) {
@@ -238,112 +214,155 @@
                     nextQuestion();
                 }
             }
-        }, 1000);
-    }
-
-    function endGame() {
-        clearInterval(timer);
-        saveScore(score);
-        let message = attempts <= 0 ? 
-            `Игра окончена! Попытки закончились. Ваш счёт: ${score}` : 
-            `Поздравляем! Вы прошли все уровни! Ваш счёт: ${score}`;
-        alert(message);
-        document.getElementById("game-container").style.display = "none";
-        document.getElementById("startButton").style.display = "block";
-        document.getElementById("leaderboardButton").style.display = "block";
-        document.getElementById("inviteButton").style.display = "block";
-        if (attempts > 0 && currentLevel >= levels.length) {
-            document.getElementById("shareButton").style.display = "block";
         }
-        updateAttemptsDisplay();
-        updateTimerDisplay(10);
-    }
 
-    function shareResult() {
-        const shareText = `Я набрал ${score} баллов в Математической игре! Попробуй побить мой рекорд! ${MINI_APP_URL}`;
-        window.Telegram.WebApp.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(MINI_APP_URL)}&text=${encodeURIComponent(shareText)}`);
-    }
-
-    function inviteFriend() {
-        const referralLink = `${MINI_APP_URL}?ref=${userId}`;
-        const inviteText = `Присоединяйся ко мне в Математической игре! За приглашение получишь бонус: +1 попытку! ${referralLink}`;
-        window.Telegram.WebApp.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent(inviteText)}`);
-        // Отправляем информацию о приглашении на сервер
-        fetch(`${SERVER_URL}/invite`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ inviterId: userId })
-        })
-        .then(response => response.json())
-        .then(data => console.log('Invite logged:', data))
-        .catch(error => console.error('Error logging invite:', error));
-    }
-
-    function checkReferralBonus() {
-        fetch(`${SERVER_URL}/check-referral?userId=${userId}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data.success && data.newAttempts) {
-                    attempts = data.newAttempts;
+        function startTimer() {
+            timeLeft = 10;
+            updateTimerDisplay();
+            clearInterval(timer);
+            timer = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    attempts--;
                     updateAttemptsDisplay();
-                    alert("Ваш друг присоединился! Вы получили +1 попытку!");
+                    if (attempts <= 0) {
+                        endGame();
+                    } else {
+                        document.getElementById("answerInput").value = "";
+                        nextQuestion();
+                    }
                 }
-            })
-            .catch(error => console.error('Error checking referral:', error));
-    }
-
-    function handleKeypadInput(event) {
-        if (!event.target.classList.contains("keypad-button")) return;
-        let value = event.target.textContent;
-        if (value === "DEL") {
-            document.getElementById("answerInput").value = "";
-        } else if (value === "OK") {
-            checkAnswer();
-        } else {
-            document.getElementById("answerInput").value += value;
+            }, 1000);
         }
-    }
 
-    function saveScore(score) {
-        fetch(`${SERVER_URL}/save-score`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userName, score, userId })
-        })
-        .then(response => response.json())
-        .then(data => console.log('Score saved:', data))
-        .catch(error => console.error('Error saving score:', error));
-    }
-
-    function showLeaderboard() {
-    fetch(`${SERVER_URL}/leaderboard`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.length === 0) {
-                alert("Таблица лидеров пуста.");
-                return;
+        function endGame() {
+            clearInterval(timer);
+            saveScore(score);
+            let message = attempts <= 0 
+                ? `Игра окончена! Попытки закончились. Ваш счёт: ${score}`
+                : `Поздравляем! Вы прошли все уровни! Ваш счёт: ${score}`;
+            alert(message);
+            document.getElementById("game-container").style.display = "none";
+            document.getElementById("startButton").style.display = "block";
+            document.getElementById("leaderboardButton").style.display = "block";
+            document.getElementById("inviteButton").style.display = "block";
+            if (attempts > 0 && currentLevel >= levels.length) {
+                document.getElementById("shareButton").style.display = "block";
             }
-            const leaderboardText = data
-                .map((entry, index) => `${index + 1}. ${entry.userName} - ${entry.score} баллов`)
-                .join("\n");
-            alert("Таблица лидеров:\n" + leaderboardText);
-        })
-        .catch(error => {
-            console.error('Error fetching leaderboard:', error);
-            alert("Ошибка при загрузке таблицы лидеров.");
-        })
-    function updateScoreDisplay() {
-        document.getElementById("scoreCount").textContent = score;
-    }
+            updateAttemptsDisplay();
+            updateTimerDisplay(10);
+        }
 
-    function updateTimerDisplay(value = timeLeft) {
-        document.getElementById("timerCount").textContent = value;
-    }
+        function shareResult() {
+            console.log("Share button clicked"); // Отладка
+            const shareText = `Я набрал ${score} баллов в Математической игре! Попробуй побить мой рекорд! ${MINI_APP_URL}`;
+            window.Telegram.WebApp.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(MINI_APP_URL)}&text=${encodeURIComponent(shareText)}`);
+        }
 
-    // Проверяем реферальный бонус при загрузке страницы
-    if (userId) {
-        checkReferralBonus();
-    }
+        function inviteFriend() {
+            console.log("Invite button clicked"); // Отладка
+            const referralLink = `${MINI_APP_URL}?ref=${userId}`;
+            const inviteText = `Присоединяйся ко мне в Математической игре! За приглашение получишь бонус: +1 попытку! ${referralLink}`;
+            window.Telegram.WebApp.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent(inviteText)}`);
+            fetch(`${SERVER_URL}/invite`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ inviterId: userId })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Invite logged:', data))
+            .catch(error => console.error('Error logging invite:', error));
+        }
+
+        function checkReferralBonus() {
+            console.log("Checking referral bonus"); // Отладка
+            fetch(`${SERVER_URL}/check-referral?userId=${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && data.newAttempts) {
+                        attempts = data.newAttempts;
+                        updateAttemptsDisplay();
+                        alert("Ваш друг присоединился! Вы получили +1 попытку!");
+                    }
+                })
+                .catch(error => console.error('Error checking referral:', error));
+        }
+
+        function handleKeypadInput(event) {
+            console.log("Keypad clicked"); // Отладка
+            if (!event.target.classList.contains("keypad-button")) return;
+            let value = event.target.textContent;
+            if (value === "DEL") {
+                document.getElementById("answerInput").value = "";
+            } else if (value === "OK") {
+                checkAnswer();
+            } else {
+                document.getElementById("answerInput").value += value;
+            }
+        }
+
+        function saveScore(score) {
+            console.log("Saving score:", score); // Отладка
+            fetch(`${SERVER_URL}/save-score`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userName, score, userId })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Score saved:', data))
+            .catch(error => console.error('Error saving score:', error));
+        }
+
+        function showLeaderboard() {
+            console.log("Leaderboard button clicked"); // Отладка
+            fetch(`${SERVER_URL}/leaderboard`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length === 0) {
+                        alert("Таблица лидеров пуста.");
+                        return;
+                    }
+                    const leaderboardText = data
+                        .map((entry, index) => `${index + 1}. ${entry.userName} - ${entry.score} баллов`)
+                        .join("\n");
+                    alert("Таблица лидеров:\n" + leaderboardText);
+                })
+                .catch(error => {
+                    console.error('Error fetching leaderboard:', error);
+                    alert("Ошибка при загрузке таблицы лидеров.");
+                });
+        }
+
+        // Недостающие функции
+        function updateScoreDisplay() {
+            console.log("Updating score display:", score); // Отладка
+            document.getElementById("scoreCount").textContent = score;
+        }
+
+        function updateTimerDisplay(value = timeLeft) {
+            console.log("Updating timer display:", value); // Отладка
+            document.getElementById("timerCount").textContent = value;
+        }
+
+        function updateAttemptsDisplay() {
+            console.log("Updating attempts display:", attempts); // Отладка
+            document.getElementById("attemptsCount").textContent = attempts;
+        }
+
+        // Привязка обработчиков событий
+        document.getElementById("startButton").addEventListener("click", startGame);
+        document.getElementById("submitAnswer").addEventListener("click", checkAnswer);
+        document.getElementById("keypad").addEventListener("click", handleKeypadInput);
+        document.getElementById("leaderboardButton").addEventListener("click", showLeaderboard);
+        document.getElementById("shareButton").addEventListener("click", shareResult);
+        document.getElementById("inviteButton").addEventListener("click", inviteFriend);
+
+        // Проверяем реферальный бонус при загрузке страницы
+        if (userId) {
+            checkReferralBonus();
+        }
     </script>
 </body>
 </html>
