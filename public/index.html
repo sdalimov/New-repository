@@ -100,6 +100,7 @@
     </style>
 </head>
 <body>
+    <div id="userDisplay" style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); font-size: 18px; font-weight: bold; color: #0088cc;"></div>
     <div id="scoreDisplay">Счёт: <span id="scoreCount">0</span></div>
     <div id="timerDisplay">Время: <span id="timerCount">10</span></div>
     <h1>Математическая Игра</h1>
@@ -157,9 +158,17 @@
         if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
             userName = window.Telegram.WebApp.initDataUnsafe.user.first_name || "Игрок";
             userId = window.Telegram.WebApp.initDataUnsafe.user.id || null;
+            updateUserDisplay(); // Отображаем имя пользователя из Telegram
+        } else {
+            updateUserDisplay(); // Для браузера показываем "Игрок"
         }
 
         // Функции
+        function updateUserDisplay() {
+            console.log("Updating user display:", userName); // Отладка
+            document.getElementById("userDisplay").textContent = `Игрок: ${userName}`;
+        }
+
         function startGame() {
             console.log("Start button clicked"); // Отладка
             if (attempts <= 0) {
