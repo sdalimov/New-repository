@@ -154,19 +154,42 @@
         let userId = null;
         const MINI_APP_URL = "http://t.me/FastSATbot/SATmathtest";
 
-        // Инициализация данных из Telegram
+        // Инициализация данных из Telegram и проверка реферального кода
         if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
             userName = window.Telegram.WebApp.initDataUnsafe.user.first_name || "Игрок";
             userId = window.Telegram.WebApp.initDataUnsafe.user.id || null;
-            updateUserDisplay(); // Отображаем имя пользователя из Telegram
+            updateUserDisplay();
+
+            // Проверяем реферальную ссылку из URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const refCode = urlParams.get('ref');
+            if (refCode) {
+                checkReferralBonus(refCode);
+            } else {
+                fetchAttempts(); // Получаем начальное количество попыток
+            }
         } else {
-            updateUserDisplay(); // Для браузера показываем "Игрок"
+            updateUserDisplay();
+            fetchAttempts(); // Получаем начальное количество попыток для браузера
         }
 
         // Функции
         function updateUserDisplay() {
             console.log("Updating user display:", userName); // Отладка
             document.getElementById("userDisplay").textContent = `Игрок: ${userName}`;
+        }
+
+        function fetchAttempts() {
+            if (!userId) return;
+            fetch(`${SERVER_URL}/check-referral?userId=${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.newAttempts !== undefined) {
+                        attempts = data.newAttempts;
+                        updateAttemptsDisplay();
+                    }
+                })
+                .catch(error => console.error('Error fetching attempts:', error));
         }
 
         function startGame() {
@@ -272,31 +295,40 @@
 
         function inviteFriend() {
             console.log("Invite button clicked"); // Отладка
-            const referralLink = `${MINI_APP_URL}?ref=${userId}`;
-            const inviteText = `Присоединяйся ко мне в Математической игре! За приглашение получишь бонус: +1 попытку! ${referralLink}`;
-            window.Telegram.WebApp.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent(inviteText)}`);
             fetch(`${SERVER_URL}/invite`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ inviterId: userId })
             })
             .then(response => response.json())
-            .then(data => console.log('Invite logged:', data))
+            .then(data => {
+                if (data.success) {
+                    const referralLink = `${MINI_APP_URL}?ref=${data.inviteCode}`;
+                    const inviteText = `Присоединяйся ко мне в Математической игре! За приглашение получишь бонус: +1 попытку! ${referralLink}`;
+                    window.Telegram.WebApp.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent(inviteText)}`);
+                }
+            })
             .catch(error => console.error('Error logging invite:', error));
         }
 
-        function checkReferralBonus() {
-            console.log("Checking referral bonus"); // Отладка
-            fetch(`${SERVER_URL}/check-referral?userId=${userId}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success && data.newAttempts) {
-                        attempts = data.newAttempts;
-                        updateAttemptsDisplay();
-                        alert("Ваш друг присоединился! Вы получили +1 попытку!");
-                    }
-                })
-                .catch(error => console.error('Error checking referral:', error));
+        function checkReferralBonus(refCode) {
+            console.log("Checking referral bonus with refCode:", refCode); // Отладка
+            fetch(`${SERVER_URL}/check-referral?userId=${userId}`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success && data.newAttempts) {
+                    attempts = data.newAttempts;
+                    updateAttemptsDisplay();
+                    alert("Ваш друг присоединился! Вы получили +1 попытку!");
+                } else {
+                    attempts = data.newAttempts || 3; // Устанавливаем начальные попытки
+                    updateAttemptsDisplay();
+                }
+            })
+            .catch(error => console.error('Error checking referral:', error));
         }
 
         function handleKeypadInput(event) {
@@ -367,11 +399,6 @@
         document.getElementById("leaderboardButton").addEventListener("click", showLeaderboard);
         document.getElementById("shareButton").addEventListener("click", shareResult);
         document.getElementById("inviteButton").addEventListener("click", inviteFriend);
-
-        // Проверяем реферальный бонус при загрузке страницы
-        if (userId) {
-            checkReferralBonus();
-        }
     </script>
 </body>
 </html>
