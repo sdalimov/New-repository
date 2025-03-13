@@ -65,8 +65,7 @@ app.post('/invite', async (req, res) => {
         return res.status(400).json({ message: 'Не указан inviterId' });
     }
     try {
-        // Сохраняем приглашение с временным уникальным кодом
-        const inviteCode = Math.random().toString(36).substring(2, 10); // Генерируем случайный код
+        const inviteCode = `ref${inviterId}`; // Постоянный код на основе inviterId
         await db.collection('invites').insertOne({
             inviterId,
             inviteCode,
@@ -87,23 +86,19 @@ app.get('/check-referral', async (req, res) => {
         return res.status(400).json({ message: 'Не указан userId' });
     }
     try {
-        // Ищем, был ли этот userId приглашён
         const referral = await db.collection('invites').findOne({ used: false });
         if (referral && referral.inviterId !== userId) {
-            // Проверяем, не приглашал ли пользователь сам себя
             const inviter = await db.collection('users').findOne({ userId: referral.inviterId });
             if (!inviter) {
                 return res.json({ success: false, message: 'Пригласивший не найден' });
             }
 
-            // Увеличиваем попытки пригласившего
             const updatedInviter = await db.collection('users').findOneAndUpdate(
                 { userId: referral.inviterId },
                 { $inc: { attempts: 1 } },
                 { returnDocument: 'after' }
             );
 
-            // Помечаем приглашение как использованное
             await db.collection('invites').updateOne(
                 { inviteCode: referral.inviteCode },
                 { $set: { used: true, usedBy: userId, usedAt: new Date() } }
@@ -111,7 +106,6 @@ app.get('/check-referral', async (req, res) => {
 
             res.json({ success: true, newAttempts: updatedInviter.value.attempts });
         } else {
-            // Если нет подходящего приглашения, возвращаем текущие попытки пользователя
             const user = await db.collection('users').findOne({ userId });
             res.json({ success: false, newAttempts: user ? user.attempts : 3 });
         }

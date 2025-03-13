@@ -35,7 +35,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        #question {
+        affection {
             font-size: 22px;
             font-weight: bold;
             margin-bottom: 15px;
@@ -152,7 +152,7 @@
         const SERVER_URL = "https://math-game-server.onrender.com";
         let userName = "Игрок";
         let userId = null;
-        const MINI_APP_URL = "http://t.me/FastSATbot/SATmathtest";
+        const MINI_APP_URL = "https://t.me/FastSATbot";
 
         // Инициализация данных из Telegram и проверка реферального кода
         if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
@@ -160,22 +160,21 @@
             userId = window.Telegram.WebApp.initDataUnsafe.user.id || null;
             updateUserDisplay();
 
-            // Проверяем реферальную ссылку из URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const refCode = urlParams.get('ref');
+            const initData = window.Telegram.WebApp.initDataUnsafe;
+            const refCode = initData.start_param || new URLSearchParams(window.location.search).get('start');
             if (refCode) {
                 checkReferralBonus(refCode);
             } else {
-                fetchAttempts(); // Получаем начальное количество попыток
+                fetchAttempts();
             }
         } else {
             updateUserDisplay();
-            fetchAttempts(); // Получаем начальное количество попыток для браузера
+            fetchAttempts();
         }
 
         // Функции
         function updateUserDisplay() {
-            console.log("Updating user display:", userName); // Отладка
+            console.log("Updating user display:", userName);
             document.getElementById("userDisplay").textContent = `Игрок: ${userName}`;
         }
 
@@ -193,7 +192,7 @@
         }
 
         function startGame() {
-            console.log("Start button clicked"); // Отладка
+            console.log("Start button clicked");
             if (attempts <= 0) {
                 alert("Вы использовали все попытки на сегодня!");
                 return;
@@ -222,7 +221,7 @@
         }
 
         function checkAnswer() {
-            console.log("Submit answer clicked"); // Отладка
+            console.log("Submit answer clicked");
             let userAnswer = document.getElementById("answerInput").value.trim();
             if (!userAnswer) return;
             
@@ -288,13 +287,13 @@
         }
 
         function shareResult() {
-            console.log("Share button clicked"); // Отладка
+            console.log("Share button clicked");
             const shareText = `Я набрал ${score} баллов в Математической игре! Попробуй побить мой рекорд! ${MINI_APP_URL}`;
             window.Telegram.WebApp.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(MINI_APP_URL)}&text=${encodeURIComponent(shareText)}`);
         }
 
         function inviteFriend() {
-            console.log("Invite button clicked"); // Отладка
+            console.log("Invite button clicked");
             fetch(`${SERVER_URL}/invite`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -303,7 +302,7 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    const referralLink = `${MINI_APP_URL}?ref=${data.inviteCode}`;
+                    const referralLink = `${MINI_APP_URL}?start=${data.inviteCode}`;
                     const inviteText = `Присоединяйся ко мне в Математической игре! За приглашение получишь бонус: +1 попытку! ${referralLink}`;
                     window.Telegram.WebApp.openTelegramLink(`https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent(inviteText)}`);
                 }
@@ -312,7 +311,7 @@
         }
 
         function checkReferralBonus(refCode) {
-            console.log("Checking referral bonus with refCode:", refCode); // Отладка
+            console.log("Checking referral bonus with refCode:", refCode);
             fetch(`${SERVER_URL}/check-referral?userId=${userId}`, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json' }
@@ -324,7 +323,7 @@
                     updateAttemptsDisplay();
                     alert("Ваш друг присоединился! Вы получили +1 попытку!");
                 } else {
-                    attempts = data.newAttempts || 3; // Устанавливаем начальные попытки
+                    attempts = data.newAttempts || 3;
                     updateAttemptsDisplay();
                 }
             })
@@ -332,7 +331,7 @@
         }
 
         function handleKeypadInput(event) {
-            console.log("Keypad clicked"); // Отладка
+            console.log("Keypad clicked");
             if (!event.target.classList.contains("keypad-button")) return;
             let value = event.target.textContent;
             if (value === "DEL") {
@@ -345,7 +344,7 @@
         }
 
         function saveScore(score) {
-            console.log("Saving score:", score); // Отладка
+            console.log("Saving score:", score);
             fetch(`${SERVER_URL}/save-score`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -357,7 +356,7 @@
         }
 
         function showLeaderboard() {
-            console.log("Leaderboard button clicked"); // Отладка
+            console.log("Leaderboard button clicked");
             fetch(`${SERVER_URL}/leaderboard`)
                 .then(response => response.json())
                 .then(data => {
@@ -376,19 +375,19 @@
                 });
         }
 
-        // Недостающие функции
+        // Обновление отображения
         function updateScoreDisplay() {
-            console.log("Updating score display:", score); // Отладка
+            console.log("Updating score display:", score);
             document.getElementById("scoreCount").textContent = score;
         }
 
         function updateTimerDisplay(value = timeLeft) {
-            console.log("Updating timer display:", value); // Отладка
+            console.log("Updating timer display:", value);
             document.getElementById("timerCount").textContent = value;
         }
 
         function updateAttemptsDisplay() {
-            console.log("Updating attempts display:", attempts); // Отладка
+            console.log("Updating attempts display:", attempts);
             document.getElementById("attemptsCount").textContent = attempts;
         }
 
