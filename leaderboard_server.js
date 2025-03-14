@@ -1,11 +1,13 @@
 const express = require('express');
 const { MongoClient } = require('mongodb');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'public'))); // Обслуживание файлов из папки public
 
 const uri = process.env.MONGODB_URI;
 const client = new MongoClient(uri);
@@ -23,6 +25,11 @@ async function connectToMongo() {
 }
 
 connectToMongo();
+
+// Маршрут для корня
+app.get('/', (req, res) => {
+    res.send('Math Game Server is running!');
+});
 
 // Сохранение результата игры
 app.post('/save-score', async (req, res) => {
@@ -65,7 +72,7 @@ app.post('/invite', async (req, res) => {
         return res.status(400).json({ message: 'Не указан inviterId' });
     }
     try {
-        const inviteCode = `ref${inviterId}`; // Постоянный код на основе inviterId
+        const inviteCode = `ref${inviterId}`;
         await db.collection('invites').insertOne({
             inviterId,
             inviteCode,
