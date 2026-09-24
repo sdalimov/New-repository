@@ -20,9 +20,9 @@ OUT = os.path.join(HERE, "site")
 CONFIG = {
     "base": "https://onsite.uz",
     "company": "ONSITE",
-    "phone": "+998903254668",
-    "phone_display": "+998 90 325 46 68",
-    "email": "sherozbekdolimov@gmail.com",
+    "phone": "+998901888557",
+    "phone_display": "+998 90 188 85 57",
+    "email": "info@onsite.uz",
     "telegram": "https://t.me/sdalimov",
     "linkedin": "https://www.linkedin.com/in/sherozbek-dalimov-16016221/",
     "og_image": "/images/sherozbek-dalimov.jpg",
@@ -59,7 +59,7 @@ CONTENT = {
     "footer_products": "Продукция", "footer_company": "Компания", "footer_contacts": "Контакты",
     "footer_dosing": "Расчёт дозировки",
     "footer_rights": "© 2026 ONSITE. Все права защищены.",
-    "footer_city": "Ташкент, Узбекистан",
+    "footer_city": "г. Ташкент, Алмазарский р-н, ул. Генерала Гафурова, тупик 2, д. 16",
     "cs_labels": ["Задача", "Решение", "Результат"],
     "pages": {
         "home": {
@@ -73,8 +73,8 @@ CONTENT = {
             "tiles_h2": "Антискалант и инженерная поддержка — от одного поставщика",
             "tiles_p": "Мы не просто продаём реагент: подбираем продукт и дозировку под вашу воду и сопровождаем установку после запуска.",
             "tiles": [
-                ["Продукт", "CLEAN RO", "Фосфонатный антискалант для установок обратного осмоса и нанофильтрации. Предотвращает отложения солей жёсткости на мембранах и продлевает интервал между промывками.", "Подробнее о CLEAN RO", "product", "#clean-ro"],
-                ["Продукт", "CLEAN RO-1", "Фосфонатный антискалант для обратного осмоса — применяется, в том числе, на производстве бутилированной воды. Выбор между CLEAN RO и CLEAN RO-1 — по анализу вашей воды.", "Подробнее о CLEAN RO-1", "product", "#clean-ro-1"],
+                ["Продукт", "CLEAN RO", "Щелочной антискалант (pH 10,0–11,5) для обратного осмоса, нано- и ультрафильтрации. Ингибирует отложения карбонатов и сульфатов, дозировка 3–10 мг/л.", "Подробнее о CLEAN RO", "product", "#clean-ro"],
+                ["Продукт", "CLEAN RO-1", "Кислотный антискалант (pH 1,5–1,7) для тех же систем. Для питьевой воды допускается до 7 г/т — применяется на производстве бутилированной воды.", "Подробнее о CLEAN RO-1", "product", "#clean-ro-1"],
                 ["Сервис", "Расчёт дозировки и поддержка", "Бесплатный расчёт дозировки по анализу исходной воды, помощь с пуском и мониторинг работы установки инженером ONSITE.", "Подробнее о сервисе", "service", ""],
             ],
             "why_badge": "Почему ONSITE",
@@ -98,8 +98,9 @@ CONTENT = {
             "faq_badge": "Вопросы", "faq_h2": "Частые вопросы",
             "faq": [
                 ["Что такое антискалант и зачем он нужен?", "Антискалант — реагент, который дозируется в исходную воду перед обратным осмосом и не даёт солям жёсткости выпадать в осадок на мембранах. Без него мембраны быстрее зарастают, падает производительность, растут расходы на промывки и замену мембран."],
-                ["Чем отличаются CLEAN RO и CLEAN RO-1?", "Оба продукта — антискаланты на основе фосфонатов для обратного осмоса. Какой из них подходит вашей установке и в какой дозировке, определяем по анализу исходной воды и параметрам системы."],
-                ["Как рассчитывается дозировка?", "По анализу исходной воды (жёсткость, щёлочность, сульфаты, кремний, железо, pH, солесодержание) и параметрам установки (производительность, выход пермеата, тип мембран). Расчёт бесплатный."],
+                ["Чем отличаются CLEAN RO и CLEAN RO-1?", "CLEAN RO — щелочной продукт (pH 10,0–11,5, плотность 1,20 г/см³), CLEAN RO-1 — кислотный (pH 1%-го раствора 1,5–1,7, плотность 1,10 г/см³). Оба ингибируют отложения карбонатов и сульфатов. Для питьевой воды CLEAN RO дозируют не более 5 г/т, CLEAN RO-1 — не более 7 г/т. Какой продукт подходит вашей установке, определяем по анализу воды."],
+                ["Как рассчитывается дозировка?", "Типичная дозировка — 3–10 мг/л, стандартно 5 г на тонну подпиточной воды. Точная доза зависит от анализа исходной воды (жёсткость, щёлочность, сульфаты, кремний, железо, pH, солесодержание) и параметров установки (производительность, выход пермеата, тип мембран). Расчёт бесплатный."],
+                ["В какой таре поставляется и сколько хранится?", "Канистра 25 кг, бочка 240 кг или IBC 1300 кг. Срок хранения — не менее 36 месяцев в закрытой заводской таре при +5…+25 °C. Температура замерзания −3 °C, зимой продукт нужно беречь от мороза."],
                 ["Есть ли технические документы на продукт?", "Да, на каждый продукт есть TDS (техническое описание) и SDS (паспорт безопасности). Отправим по запросу."],
                 ["Как происходит оплата и доставка?", "Работаем по договору, оплата в сумах. Поставляем со склада в Ташкенте с доставкой по всему Узбекистану."],
             ],
@@ -112,21 +113,32 @@ CONTENT = {
             "tag": "Продукция · Антискаланты",
             "h1": "Антискаланты CLEAN RO и CLEAN RO-1",
             "lead": "Фосфонатные ингибиторы накипеобразования для систем обратного осмоса и нанофильтрации. Производитель — ONSITE, Ташкент.",
-            "summary": "CLEAN RO и CLEAN RO-1 — антискаланты на основе фосфонатов производства ONSITE (Ташкент, Узбекистан) для защиты мембран обратного осмоса от карбонатных и сульфатных отложений. TDS и SDS — по запросу; дозировка рассчитывается бесплатно по анализу воды.",
+            "summary": "CLEAN RO и CLEAN RO-1 — антискаланты производства ONSITE (Ташкент, Узбекистан) на основе органических комплексонов для обратного осмоса, нано- и ультрафильтрации. Ингибируют отложения карбонатов и сульфатов; дозировка 3–10 мг/л (стандартно 5 г/т). Фасовка 25 кг, 240 кг и 1300 кг; срок хранения 36 месяцев.",
             "line_badge": "Линейка продуктов", "line_h2": "Два продукта — одна задача: чистые мембраны",
-            "spec_labels": ["Основа", "Назначение", "Дозировка", "Документы", "Фасовка"],
-            "spec_values": ["Фосфонаты", "Обратный осмос, нанофильтрация", "По расчёту на основе анализа воды", "TDS, SDS", "По запросу"],
-            "card_tag": "Антискалант для ОО и НФ",
-            "p_clean_ro": "Фосфонатный ингибитор накипеобразования для промышленных установок обратного осмоса и нанофильтрации.",
-            "p_clean_ro_1": "Фосфонатный антискалант для обратного осмоса. Применяется, в том числе, на производстве бутилированной воды (Refresh Water).",
-            "how_badge": "Как действует", "how_h2": "Как антискалант защищает мембраны",
+            "spec_labels": ["Вид", "Цвет", "pH", "Плотность", "Основа", "Дозировка", "Питьевая вода", "Мембраны", "Фасовка", "Срок хранения"],
+            "spec_ro": ["Жидкость", "От бесцветного до слегка жёлтого", "10,0–11,5", "1,20 г/см³", "Органические комплексоны", "3–10 мг/л, стандартно 5 г/т", "Не более 5 г/т подпиточной воды", "Все полиамидные", "Канистра 25 кг, бочка 240 кг, IBC 1300 кг", "36 месяцев при +5…+25 °C"],
+            "spec_ro1": ["Жидкость", "От бесцветного до слегка жёлтого", "1,5–1,7 (1% раствор)", "1,10 ± 0,02 г/см³", "Органические комплексоны", "3–10 мг/л, стандартно 5 г/т", "Не более 7 г/т подпиточной воды", "Все полиамидные", "Канистра 25 кг, бочка 240 кг, IBC 1300 кг", "36 месяцев при +5…+25 °C"],
+            "tag_ro": "Щелочной антискалант · pH 10,0–11,5",
+            "tag_ro1": "Кислотный антискалант · pH 1,5–1,7 (1%)",
+            "p_clean_ro": "Антискалант для обратного осмоса, нано- и ультрафильтрации. Стабилизирует пересыщенные солевые растворы, ингибирует отложения карбонатов и сульфатов металлов и содержит компоненты для удаления уже имеющихся солей с поверхности мембран.",
+            "p_clean_ro_1": "Кислотный антискалант для обратного осмоса, нано- и ультрафильтрации с теми же функциями. Для питьевой воды допускает дозировку до 7 г/т — применяется на производстве бутилированной воды (Refresh Water).",
+            "how_badge": "Преимущества", "how_h2": "Что дают CLEAN RO и CLEAN RO-1",
             "how": [
-                "Пороговое ингибирование: удерживает соли жёсткости в растворе при концентрациях выше предела растворимости",
-                "Модификация кристаллов: искажает рост кристаллов, и они не закрепляются на поверхности мембраны",
-                "Диспергирование: не даёт мелким частицам слипаться и оседать в концентратном канале",
-                "Продлевает интервал между химическими промывками мембран",
-                "Стабилизирует рабочее давление и производительность установки",
-                "Снижает затраты на замену мембран",
+                "Ингибируют отложения карбонатов и сульфатов металлов",
+                "Работают на широком спектре качества воды",
+                "Во многих программах обработки не требуют дозирования соляной или другой кислоты",
+                "Содержат компоненты для удаления уже имеющихся солей с поверхности мембран",
+                "Совместимы со всеми мембранами на основе полиамидов",
+                "Продлевают интервал между химическими промывками и срок службы мембран",
+            ],
+            "hand_badge": "Дозирование и хранение", "hand_h2": "Как применять и хранить",
+            "hand": [
+                "Подавайте продукт постоянно, из закрытой ёмкости, без контакта с атмосферой",
+                "Настройте дозирующий насос на максимальную частоту и корректируйте дозировку",
+                "Насосы, линии и ёмкости — из ПВХ, полиэтилена, тефлона или нержавеющей стали",
+                "Не допускайте контакта неразбавленного продукта с алюминием, латунью и углеродистой сталью",
+                "Хранение: не менее 36 месяцев в закрытой заводской таре при +5…+25 °C; температура замерзания −3 °C",
+                "Средства защиты при работе: очки и резиновые перчатки",
             ],
             "steps_badge": "Как начать", "steps_h2": "Начало работы — 4 шага",
             "steps": [
@@ -139,6 +151,7 @@ CONTENT = {
             "price_note": "Склад в Ташкенте, поставка по всему Узбекистану",
             "price_h4": "Условия поставки",
             "price_list": [
+                "Фасовка: канистра 25 кг, бочка 240 кг, IBC 1300 кг",
                 "Цена — по запросу, зависит от объёма и формата поставки",
                 "Оплата в сумах по договору",
                 "TDS и SDS предоставляются с поставкой",
@@ -281,7 +294,7 @@ CONTENT = {
     "footer_products": "Mahsulotlar", "footer_company": "Kompaniya", "footer_contacts": "Kontaktlar",
     "footer_dosing": "Dozani hisoblash",
     "footer_rights": "© 2026 ONSITE. Barcha huquqlar himoyalangan.",
-    "footer_city": "Toshkent, O'zbekiston",
+    "footer_city": "Toshkent sh., Olmazor tumani, General G'ofurov ko'chasi, 2-tupik, 16-uy",
     "cs_labels": ["Vazifa", "Yechim", "Natija"],
     "pages": {
         "home": {
@@ -295,8 +308,8 @@ CONTENT = {
             "tiles_h2": "Antiskalant va muhandislik yordami — bitta yetkazib beruvchidan",
             "tiles_p": "Biz shunchaki reagent sotmaymiz: mahsulot va dozani suvingizga moslab tanlaymiz va ishga tushirilgandan keyin ham qurilmani kuzatib boramiz.",
             "tiles": [
-                ["Mahsulot", "CLEAN RO", "Teskari osmos va nanofiltratsiya qurilmalari uchun fosfonat asosidagi antiskalant. Membranalarda qattiqlik tuzlari cho'kishining oldini oladi va yuvishlar orasidagi muddatni uzaytiradi.", "CLEAN RO haqida batafsil", "product", "#clean-ro"],
-                ["Mahsulot", "CLEAN RO-1", "Teskari osmos uchun fosfonat asosidagi antiskalant — jumladan, qadoqlangan suv ishlab chiqarishda qo'llaniladi. CLEAN RO yoki CLEAN RO-1 suvingiz tahlili asosida tanlanadi.", "CLEAN RO-1 haqida batafsil", "product", "#clean-ro-1"],
+                ["Mahsulot", "CLEAN RO", "Teskari osmos, nano- va ultrafiltratsiya uchun ishqoriy antiskalant (pH 10,0–11,5). Karbonat va sulfat cho'kindilarini ingibirlaydi, doza 3–10 mg/l.", "CLEAN RO haqida batafsil", "product", "#clean-ro"],
+                ["Mahsulot", "CLEAN RO-1", "Xuddi shu tizimlar uchun kislotali antiskalant (pH 1,5–1,7). Ichimlik suvi uchun 7 g/t gacha ruxsat etiladi — qadoqlangan suv ishlab chiqarishda qo'llaniladi.", "CLEAN RO-1 haqida batafsil", "product", "#clean-ro-1"],
                 ["Servis", "Dozani hisoblash va texnik yordam", "Manba suvi tahlili asosida dozani bepul hisoblash, ishga tushirishda yordam va ONSITE muhandisi tomonidan qurilma ishini monitoring qilish.", "Servis haqida batafsil", "service", ""],
             ],
             "why_badge": "Nega ONSITE",
@@ -320,8 +333,9 @@ CONTENT = {
             "faq_badge": "Savollar", "faq_h2": "Tez-tez so'raladigan savollar",
             "faq": [
                 ["Antiskalant nima va u nima uchun kerak?", "Antiskalant — teskari osmosdan oldin manba suviga dozalanadigan reagent bo'lib, qattiqlik tuzlarining membranalarda cho'kishiga yo'l qo'ymaydi. Usiz membranalar tezroq ifloslanadi, unumdorlik pasayadi, yuvish va membranalarni almashtirish xarajatlari oshadi."],
-                ["CLEAN RO va CLEAN RO-1 nimasi bilan farq qiladi?", "Ikkala mahsulot ham teskari osmos uchun fosfonat asosidagi antiskalantdir. Qaysi biri qurilmangizga mos kelishi va qanday dozada ekanini manba suvi tahlili va tizim parametrlari asosida aniqlaymiz."],
-                ["Doza qanday hisoblanadi?", "Manba suvi tahlili (qattiqlik, ishqoriylik, sulfatlar, kremniy, temir, pH, tuz miqdori) va qurilma parametrlari (unumdorlik, permeat chiqishi, membrana turi) asosida. Hisob-kitob bepul."],
+                ["CLEAN RO va CLEAN RO-1 nimasi bilan farq qiladi?", "CLEAN RO — ishqoriy mahsulot (pH 10,0–11,5, zichligi 1,20 g/sm³), CLEAN RO-1 — kislotali (1% eritma pH 1,5–1,7, zichligi 1,10 g/sm³). Ikkalasi ham karbonat va sulfat cho'kindilarini ingibirlaydi. Ichimlik suvi uchun CLEAN RO 5 g/t dan, CLEAN RO-1 esa 7 g/t dan ko'p dozalanmaydi. Qaysi mahsulot qurilmangizga mosligini suv tahlili asosida aniqlaymiz."],
+                ["Doza qanday hisoblanadi?", "Odatiy doza — 3–10 mg/l, standart bo'yicha qo'shimcha suvning 1 tonnasiga 5 g. Aniq doza manba suvi tahlili (qattiqlik, ishqoriylik, sulfatlar, kremniy, temir, pH, tuz miqdori) va qurilma parametrlariga (unumdorlik, permeat chiqishi, membrana turi) bog'liq. Hisob-kitob bepul."],
+                ["Qanday idishda yetkaziladi va qancha saqlanadi?", "25 kg kanistra, 240 kg bochka yoki 1300 kg IBC. Saqlash muddati — yopiq zavod idishida +5…+25 °C da kamida 36 oy. Muzlash harorati −3 °C, qishda mahsulotni sovuqdan asrash kerak."],
                 ["Mahsulot uchun texnik hujjatlar bormi?", "Ha, har bir mahsulot uchun TDS (texnik tavsif) va SDS (xavfsizlik pasporti) mavjud. So'rov bo'yicha yuboramiz."],
                 ["To'lov va yetkazib berish qanday amalga oshiriladi?", "Shartnoma asosida ishlaymiz, to'lov so'mda. Toshkentdagi ombordan O'zbekiston bo'ylab yetkazib beramiz."],
             ],
@@ -334,21 +348,32 @@ CONTENT = {
             "tag": "Mahsulotlar · Antiskalantlar",
             "h1": "CLEAN RO va CLEAN RO-1 antiskalantlari",
             "lead": "Teskari osmos va nanofiltratsiya tizimlari uchun fosfonat asosidagi cho'kindi ingibitorlari. Ishlab chiqaruvchi — ONSITE, Toshkent.",
-            "summary": "CLEAN RO va CLEAN RO-1 — ONSITE (Toshkent, O'zbekiston) ishlab chiqargan fosfonat asosidagi antiskalantlar bo'lib, teskari osmos membranalarini karbonat va sulfat cho'kindilaridan himoya qiladi. TDS va SDS — so'rov bo'yicha; doza suv tahlili asosida bepul hisoblanadi.",
+            "summary": "CLEAN RO va CLEAN RO-1 — ONSITE (Toshkent, O'zbekiston) ishlab chiqargan, teskari osmos, nano- va ultrafiltratsiya uchun organik kompleksonlar asosidagi antiskalantlar. Karbonat va sulfat cho'kindilarini ingibirlaydi; doza 3–10 mg/l (standart 5 g/t). Qadoqlash 25 kg, 240 kg va 1300 kg; saqlash muddati 36 oy.",
             "line_badge": "Mahsulot qatori", "line_h2": "Ikki mahsulot — bitta vazifa: toza membranalar",
-            "spec_labels": ["Asos", "Qo'llanilishi", "Doza", "Hujjatlar", "Qadoqlash"],
-            "spec_values": ["Fosfonatlar", "Teskari osmos, nanofiltratsiya", "Suv tahlili asosida hisoblanadi", "TDS, SDS", "So'rov bo'yicha"],
-            "card_tag": "TO va NF uchun antiskalant",
-            "p_clean_ro": "Sanoat teskari osmos va nanofiltratsiya qurilmalari uchun fosfonat asosidagi cho'kindi ingibitori.",
-            "p_clean_ro_1": "Teskari osmos uchun fosfonat asosidagi antiskalant. Jumladan, qadoqlangan suv ishlab chiqarishda qo'llaniladi (Refresh Water).",
-            "how_badge": "Qanday ishlaydi", "how_h2": "Antiskalant membranalarni qanday himoya qiladi",
+            "spec_labels": ["Ko'rinishi", "Rangi", "pH", "Zichligi", "Asosi", "Doza", "Ichimlik suvi", "Membranalar", "Qadoqlash", "Saqlash muddati"],
+            "spec_ro": ["Suyuqlik", "Rangsizdan och sariqqacha", "10,0–11,5", "1,20 g/sm³", "Organik kompleksonlar", "3–10 mg/l, standart 5 g/t", "Qo'shimcha suvning 1 tonnasiga 5 g dan ko'p emas", "Barcha poliamid membranalar", "25 kg kanistra, 240 kg bochka, 1300 kg IBC", "+5…+25 °C da 36 oy"],
+            "spec_ro1": ["Suyuqlik", "Rangsizdan och sariqqacha", "1,5–1,7 (1% eritma)", "1,10 ± 0,02 g/sm³", "Organik kompleksonlar", "3–10 mg/l, standart 5 g/t", "Qo'shimcha suvning 1 tonnasiga 7 g dan ko'p emas", "Barcha poliamid membranalar", "25 kg kanistra, 240 kg bochka, 1300 kg IBC", "+5…+25 °C da 36 oy"],
+            "tag_ro": "Ishqoriy antiskalant · pH 10,0–11,5",
+            "tag_ro1": "Kislotali antiskalant · pH 1,5–1,7 (1%)",
+            "p_clean_ro": "Teskari osmos, nano- va ultrafiltratsiya uchun antiskalant. O'ta to'yingan tuz eritmalarini barqarorlashtiradi, metall karbonatlari va sulfatlari cho'kishini ingibirlaydi hamda membrana yuzasidagi mavjud tuzlarni ketkazuvchi komponentlarni o'z ichiga oladi.",
+            "p_clean_ro_1": "Xuddi shu vazifalarni bajaradigan teskari osmos, nano- va ultrafiltratsiya uchun kislotali antiskalant. Ichimlik suvi uchun 7 g/t gacha dozaga ruxsat beradi — qadoqlangan suv ishlab chiqarishda qo'llaniladi (Refresh Water).",
+            "how_badge": "Afzalliklar", "how_h2": "CLEAN RO va CLEAN RO-1 nima beradi",
             "how": [
-                "Chegaraviy ingibirlash: qattiqlik tuzlarini eruvchanlik chegarasidan yuqori konsentratsiyalarda ham eritmada ushlab turadi",
-                "Kristallarni modifikatsiyalash: kristallar o'sishini buzadi va ular membrana yuzasiga yopishmaydi",
-                "Dispersiyalash: mayda zarrachalarning yopishib, konsentrat kanalida cho'kishiga yo'l qo'ymaydi",
-                "Membranalarni kimyoviy yuvish orasidagi muddatni uzaytiradi",
-                "Qurilmaning ish bosimi va unumdorligini barqarorlashtiradi",
-                "Membranalarni almashtirish xarajatlarini kamaytiradi",
+                "Metall karbonatlari va sulfatlari cho'kishini ingibirlaydi",
+                "Suv sifatining keng doirasida ishlaydi",
+                "Ko'plab ishlov berish dasturlarida xlorid yoki boshqa kislotani dozalashni talab qilmaydi",
+                "Membrana yuzasidagi mavjud tuzlarni ketkazuvchi komponentlarni o'z ichiga oladi",
+                "Poliamid asosidagi barcha membranalar bilan mos keladi",
+                "Kimyoviy yuvishlar orasidagi muddatni va membranalar xizmat muddatini uzaytiradi",
+            ],
+            "hand_badge": "Dozalash va saqlash", "hand_h2": "Qanday qo'llash va saqlash",
+            "hand": [
+                "Mahsulotni doimiy ravishda, yopiq idishdan, atmosfera bilan aloqa qilmasdan bering",
+                "Dozalash nasosini maksimal chastotaga sozlang va dozani to'g'rilang",
+                "Nasoslar, liniyalar va idishlar — PVX, polietilen, teflon yoki zanglamaydigan po'latdan",
+                "Suyultirilmagan mahsulotning alyuminiy, latun va uglerodli po'lat bilan aloqasiga yo'l qo'ymang",
+                "Saqlash: yopiq zavod idishida +5…+25 °C da kamida 36 oy; muzlash harorati −3 °C",
+                "Ishlashda himoya vositalari: ko'zoynak va rezina qo'lqoplar",
             ],
             "steps_badge": "Ishni boshlash", "steps_h2": "4 qadamda ishni boshlash",
             "steps": [
@@ -361,6 +386,7 @@ CONTENT = {
             "price_note": "Toshkentda ombor, O'zbekiston bo'ylab yetkazib berish",
             "price_h4": "Yetkazib berish shartlari",
             "price_list": [
+                "Qadoqlash: 25 kg kanistra, 240 kg bochka, 1300 kg IBC",
                 "Narx — so'rov bo'yicha, hajm va yetkazib berish formatiga bog'liq",
                 "Shartnoma asosida so'mda to'lov",
                 "TDS va SDS yetkazib berish bilan birga taqdim etiladi",
@@ -503,7 +529,7 @@ CONTENT = {
     "footer_products": "Products", "footer_company": "Company", "footer_contacts": "Contacts",
     "footer_dosing": "Dosing calculation",
     "footer_rights": "© 2026 ONSITE. All rights reserved.",
-    "footer_city": "Tashkent, Uzbekistan",
+    "footer_city": "16 General Gafurov St., dead-end 2, Almazar district, Tashkent, Uzbekistan",
     "cs_labels": ["Challenge", "Solution", "Result"],
     "pages": {
         "home": {
@@ -517,8 +543,8 @@ CONTENT = {
             "tiles_h2": "Antiscalant and engineering support from one supplier",
             "tiles_p": "We don't just sell a chemical: we match the product and dose to your water and stay with your system after start-up.",
             "tiles": [
-                ["Product", "CLEAN RO", "Phosphonate-based antiscalant for reverse osmosis and nanofiltration systems. Prevents hardness scale on membranes and extends the time between cleanings.", "More about CLEAN RO", "product", "#clean-ro"],
-                ["Product", "CLEAN RO-1", "Phosphonate-based antiscalant for reverse osmosis, used among others in bottled water production. We choose between CLEAN RO and CLEAN RO-1 based on your water analysis.", "More about CLEAN RO-1", "product", "#clean-ro-1"],
+                ["Product", "CLEAN RO", "Alkaline antiscalant (pH 10.0–11.5) for reverse osmosis, nanofiltration and ultrafiltration. Inhibits carbonate and sulfate scale at 3–10 mg/L.", "More about CLEAN RO", "product", "#clean-ro"],
+                ["Product", "CLEAN RO-1", "Acidic antiscalant (pH 1.5–1.7) for the same systems. Up to 7 g/t allowed for drinking water — used in bottled water production.", "More about CLEAN RO-1", "product", "#clean-ro-1"],
                 ["Service", "Dosing calculation and support", "Free dose calculation from your feed water analysis, start-up assistance and system monitoring by an ONSITE engineer.", "More about the service", "service", ""],
             ],
             "why_badge": "Why ONSITE",
@@ -542,8 +568,9 @@ CONTENT = {
             "faq_badge": "Questions", "faq_h2": "Frequently asked questions",
             "faq": [
                 ["What is an antiscalant and why is it needed?", "An antiscalant is dosed into the feed water ahead of reverse osmosis and keeps hardness salts from precipitating on the membranes. Without it, membranes foul faster, output drops, and cleaning and membrane replacement costs rise."],
-                ["What is the difference between CLEAN RO and CLEAN RO-1?", "Both are phosphonate-based antiscalants for reverse osmosis. We determine which one suits your system, and at what dose, from your feed water analysis and system parameters."],
-                ["How is the dose calculated?", "From your feed water analysis (hardness, alkalinity, sulfates, silica, iron, pH, TDS) and system parameters (capacity, recovery, membrane type). The calculation is free."],
+                ["What is the difference between CLEAN RO and CLEAN RO-1?", "CLEAN RO is alkaline (pH 10.0–11.5, density 1.20 g/cm³); CLEAN RO-1 is acidic (1% solution pH 1.5–1.7, density 1.10 g/cm³). Both inhibit carbonate and sulfate scale. For drinking water, CLEAN RO is dosed at no more than 5 g/t and CLEAN RO-1 at no more than 7 g/t. We determine which suits your system from your water analysis."],
+                ["How is the dose calculated?", "The typical dose is 3–10 mg/L, with 5 g per tonne of feed water as standard. The exact dose depends on your feed water analysis (hardness, alkalinity, sulfates, silica, iron, pH, TDS) and system parameters (capacity, recovery, membrane type). The calculation is free."],
+                ["What packaging is available and what is the shelf life?", "25 kg canister, 240 kg drum or 1300 kg IBC. Shelf life is at least 36 months in the sealed original container at +5…+25 °C. The freezing point is −3 °C, so protect the product from frost in winter."],
                 ["Do you provide technical documents?", "Yes, every product has a TDS (technical data sheet) and an SDS (safety data sheet). We send them on request."],
                 ["How do payment and delivery work?", "We work under contract with payment in UZS, and deliver from our Tashkent warehouse across Uzbekistan."],
             ],
@@ -556,21 +583,32 @@ CONTENT = {
             "tag": "Products · Antiscalants",
             "h1": "CLEAN RO and CLEAN RO-1 antiscalants",
             "lead": "Phosphonate-based scale inhibitors for reverse osmosis and nanofiltration systems. Made in Tashkent by ONSITE.",
-            "summary": "CLEAN RO and CLEAN RO-1 are phosphonate-based antiscalants made by ONSITE (Tashkent, Uzbekistan) to protect reverse osmosis membranes from carbonate and sulfate scale. TDS and SDS on request; dosing is calculated free from your water analysis.",
+            "summary": "CLEAN RO and CLEAN RO-1 are antiscalants made by ONSITE (Tashkent, Uzbekistan) from organic complexones for reverse osmosis, nanofiltration and ultrafiltration. They inhibit carbonate and sulfate scale at 3–10 mg/L (typically 5 g/t). Packed in 25 kg, 240 kg and 1300 kg; 36-month shelf life.",
             "line_badge": "Product line", "line_h2": "Two products, one job: clean membranes",
-            "spec_labels": ["Base", "Application", "Dose", "Documents", "Packaging"],
-            "spec_values": ["Phosphonates", "Reverse osmosis, nanofiltration", "Calculated from water analysis", "TDS, SDS", "On request"],
-            "card_tag": "Antiscalant for RO and NF",
-            "p_clean_ro": "Phosphonate-based scale inhibitor for industrial reverse osmosis and nanofiltration systems.",
-            "p_clean_ro_1": "Phosphonate-based antiscalant for reverse osmosis, used among others in bottled water production (Refresh Water).",
-            "how_badge": "How it works", "how_h2": "How an antiscalant protects membranes",
+            "spec_labels": ["Form", "Color", "pH", "Density", "Base", "Dose", "Drinking water", "Membranes", "Packaging", "Shelf life"],
+            "spec_ro": ["Liquid", "Colorless to slightly yellow", "10.0–11.5", "1.20 g/cm³", "Organic complexones", "3–10 mg/L, typically 5 g/t", "Max 5 g per tonne of feed water", "All polyamide membranes", "25 kg PE canister, 240 kg PE drum, 1300 kg IBC", "36 months at +5…+25 °C"],
+            "spec_ro1": ["Liquid", "Colorless to slightly yellow", "1.5–1.7 (1% solution)", "1.10 ± 0.02 g/cm³", "Organic complexones", "3–10 mg/L, typically 5 g/t", "Max 7 g per tonne of feed water", "All polyamide membranes", "25 kg PE canister, 240 kg PE drum, 1300 kg IBC", "36 months at +5…+25 °C"],
+            "tag_ro": "Alkaline antiscalant · pH 10.0–11.5",
+            "tag_ro1": "Acidic antiscalant · pH 1.5–1.7 (1%)",
+            "p_clean_ro": "Antiscalant for reverse osmosis, nanofiltration and ultrafiltration. Stabilizes supersaturated salt solutions, inhibits metal carbonate and sulfate scale, and contains components that remove existing salts from the membrane surface.",
+            "p_clean_ro_1": "Acidic antiscalant for reverse osmosis, nanofiltration and ultrafiltration with the same functions. Allows up to 7 g/t for drinking water — used in bottled water production (Refresh Water).",
+            "how_badge": "Benefits", "how_h2": "What CLEAN RO and CLEAN RO-1 deliver",
             "how": [
-                "Threshold inhibition: keeps hardness salts in solution above their solubility limit",
-                "Crystal modification: distorts crystal growth so crystals don't attach to the membrane",
-                "Dispersion: stops fine particles from agglomerating and settling in the concentrate channel",
-                "Extends the time between chemical cleanings",
-                "Stabilizes operating pressure and system output",
-                "Reduces membrane replacement costs",
+                "Inhibit metal carbonate and sulfate scale",
+                "Work across a wide range of water quality",
+                "In many treatment programs, no hydrochloric or other acid dosing is needed",
+                "Contain components that remove existing salts from the membrane surface",
+                "Compatible with all polyamide membranes",
+                "Extend the time between chemical cleanings and membrane life",
+            ],
+            "hand_badge": "Dosing and storage", "hand_h2": "How to apply and store",
+            "hand": [
+                "Dose continuously from a closed tank, without contact with the atmosphere",
+                "Set the dosing pump to maximum stroke frequency and adjust the dose",
+                "Pumps, lines and tanks: PVC, polyethylene, PTFE or stainless steel",
+                "Keep the neat product away from aluminum, brass and carbon steel",
+                "Shelf life: at least 36 months in the sealed original container at +5…+25 °C; freezing point −3 °C",
+                "PPE when handling: goggles and rubber gloves",
             ],
             "steps_badge": "Getting started", "steps_h2": "Get started in 4 steps",
             "steps": [
@@ -583,6 +621,7 @@ CONTENT = {
             "price_note": "Warehouse in Tashkent, delivery across Uzbekistan",
             "price_h4": "Supply terms",
             "price_list": [
+                "Packaging: 25 kg canister, 240 kg drum, 1300 kg IBC",
                 "Price on request, depending on volume and delivery format",
                 "Payment in UZS under contract",
                 "TDS and SDS provided with delivery",
@@ -748,7 +787,7 @@ def org_ld():
         "logo": CONFIG["base"] + "/favicon.svg",
         "email": "mailto:" + CONFIG["email"],
         "telephone": CONFIG["phone"],
-        "address": {"@type": "PostalAddress", "addressLocality": "Tashkent", "addressCountry": "UZ"},
+        "address": {"@type": "PostalAddress", "streetAddress": "General Gafurov St., dead-end 2, 16", "addressRegion": "Almazar district", "addressLocality": "Tashkent", "addressCountry": "UZ"},
         "areaServed": "UZ",
         "brand": [{"@type": "Brand", "name": "CLEAN RO"}],
         "sameAs": [CONFIG["telegram"]],
@@ -1063,11 +1102,10 @@ def page_home(lang):
 def page_product(lang):
     p = CONTENT[lang]["pages"]["product"]
 
-    def card(pid, name, text, alt=False):
-        rows = "".join(f"<tr><th>{esc(k)}</th><td>{esc(v)}</td></tr>" for k, v in zip(p["spec_labels"], p["spec_values"]))
-        # TODO: add product-specific specs from TDS (appearance, pH, density, packaging, shelf life)
+    def card(pid, name, text, tag, values, alt=False):
+        rows = "".join(f"<tr><th>{esc(k)}</th><td>{esc(v)}</td></tr>" for k, v in zip(p["spec_labels"], values))
         return f"""        <div class="product-card{' alt' if alt else ''}" id="{pid}">
-          <div class="tag">{esc(p["card_tag"])}</div>
+          <div class="tag">{esc(tag)}</div>
           <h3>{esc(name)}</h3>
           <p>{esc(text)}</p>
           <table class="spec-table">{rows}</table>
@@ -1081,7 +1119,7 @@ def page_product(lang):
     <div class="wrap">
 {section_head(p["line_badge"], p["line_h2"])}
       <div class="product-grid">
-{card("clean-ro", "CLEAN RO", p["p_clean_ro"])}{card("clean-ro-1", "CLEAN RO-1", p["p_clean_ro_1"], True)}      </div>
+{card("clean-ro", "CLEAN RO", p["p_clean_ro"], p["tag_ro"], p["spec_ro"])}{card("clean-ro-1", "CLEAN RO-1", p["p_clean_ro_1"], p["tag_ro1"], p["spec_ro1"], True)}      </div>
     </div>
   </section>
   <section class="section-alt">
@@ -1096,7 +1134,13 @@ def page_product(lang):
       {steps(p["steps"])}
     </div>
   </section>
-  <section class="price-band">
+  <section class="section-alt">
+    <div class="wrap">
+{section_head(p["hand_badge"], p["hand_h2"])}
+      {includes(p["hand"], "var(--green)")}
+    </div>
+  </section>
+  <section>
     <div class="wrap">
       <div class="price-card">
         <div class="price-left">
@@ -1113,10 +1157,13 @@ def page_product(lang):
   </section>
 """
     products = []
-    for pid, name, text in (("clean-ro", "CLEAN RO", p["p_clean_ro"]), ("clean-ro-1", "CLEAN RO-1", p["p_clean_ro_1"])):
+    for pid, name, text, values in (("clean-ro", "CLEAN RO", p["p_clean_ro"], p["spec_ro"]),
+                                    ("clean-ro-1", "CLEAN RO-1", p["p_clean_ro_1"], p["spec_ro1"])):
         products.append({
             "@type": "Product", "@id": abs_url("product", lang) + "#" + pid, "name": name,
             "description": text, "category": "Antiscalant", "url": abs_url("product", lang) + "#" + pid,
+            "additionalProperty": [{"@type": "PropertyValue", "name": k, "value": v}
+                                   for k, v in zip(p["spec_labels"], values)],
             "brand": {"@type": "Brand", "name": "CLEAN RO"}, "manufacturer": {"@id": CONFIG["base"] + "/#org"},
         })
     ld = [{"@context": "https://schema.org", "@graph": [org_ld()] + products}]
@@ -1305,10 +1352,10 @@ def build_llms():
     cases = ", ".join(c["name"] for c in ru["cases"])
     return f"""# ONSITE
 
-> ONSITE is an antiscalant manufacturer in Tashkent, Uzbekistan. Brand: CLEAN RO (products CLEAN RO and CLEAN RO-1) — phosphonate-based antiscalants for reverse osmosis and nanofiltration membranes. Production capacity: 40 tonnes per month. Free dosing calculation from feed water analysis; TDS and SDS available for every product; delivery across Uzbekistan, payment in UZS.
+> ONSITE is an antiscalant manufacturer in Tashkent, Uzbekistan. Brand: CLEAN RO — CLEAN RO (alkaline, pH 10.0–11.5, density 1.20 g/cm³) and CLEAN RO-1 (acidic, 1% solution pH 1.5–1.7, density 1.10 g/cm³), liquid antiscalants based on organic complexones for reverse osmosis, nanofiltration and ultrafiltration. Dose 3–10 mg/L (standard 5 g/t; drinking water max 5 g/t for CLEAN RO, 7 g/t for CLEAN RO-1). Packaging: 25 kg canister, 240 kg drum, 1300 kg IBC. Shelf life 36 months at +5…+25 °C. Production capacity: 40 tonnes per month. Free dosing calculation from feed water analysis; TDS and SDS available for every product; delivery across Uzbekistan, payment in UZS.
 
 ## Products
-- [CLEAN RO and CLEAN RO-1]({b}{PATHS["product"]["en"]}): phosphonate-based antiscalants for reverse osmosis and nanofiltration.
+- [CLEAN RO and CLEAN RO-1]({b}{PATHS["product"]["en"]}): antiscalants for reverse osmosis, nanofiltration and ultrafiltration; carbonate and sulfate scale inhibition; compatible with all polyamide membranes.
 
 ## Service
 - [Dosing calculation and technical support]({b}{PATHS["service"]["en"]}): free dose calculation, start-up, monitoring, membrane cleaning recommendations.
@@ -1328,6 +1375,7 @@ def build_llms():
 - English: {b}/en/
 
 ## Contact
+- Company: OOO «ONSITE», 16 General Gafurov St., dead-end 2, Almazar district, Tashkent, Uzbekistan
 - Email: {CONFIG["email"]}
 - Phone: {CONFIG["phone_display"]}
 - Telegram: {CONFIG["telegram"]}
