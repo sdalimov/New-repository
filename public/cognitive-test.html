@@ -459,16 +459,16 @@
       const bar = `<div class="barTrack"><div class="zero"></div><div class="bar" style="${diff >= 0 ? 'left:50%' : `left:${50 - w}%`};width:${w}%;background:${diff >= 0 ? 'var(--good)' : 'var(--bad)'}"></div></div>`;
       const verdict = diff == null || c === rRef.value ? '' : Math.abs(diff) < 0.3 ? 'шум' : Math.abs(diff) <= 0.5 ? 'слабый' : 'заметный';
       return `<tr><td><b>${esc(c)}</b></td><td>${ss.length}</td>
-        ${CORE.map((m) => `<td>${r1(mean(ss.map((s) => s[m.key]).filter((v) => typeof v === 'number')))}</td>`).join('')}
-        <td>${r2(idx)} ± ${r2(sd(idxs)) ?? '—'}</td><td>${diff == null ? '—' : (diff > 0 ? '+' : '') + r2(diff)}</td><td>${bar}</td><td>${verdict}</td></tr>`;
+        <td>${r2(idx)} ± ${r2(sd(idxs)) ?? '—'}</td><td>${diff == null ? '—' : (diff > 0 ? '+' : '') + r2(diff)}</td><td>${verdict}</td><td>${bar}</td>
+        ${CORE.map((m) => `<td>${r1(mean(ss.map((s) => s[m.key]).filter((v) => typeof v === 'number')))}</td>`).join('')}</tr>`;
     }).join('');
-    $('resTable').innerHTML = `<table><thead><tr><th>Условие</th><th>n</th>${CORE.map((m) => `<th>${m.label}</th>`).join('')}
-      <th>Индекс</th><th>Δ к эталону</th><th></th><th>Оценка</th></tr></thead><tbody>${rows}</tbody></table>`;
+    $('resTable').innerHTML = `<table><thead><tr><th>Условие</th><th>n</th><th>Индекс</th><th>Δ к эталону</th><th>Оценка</th><th></th>
+      ${CORE.map((m) => `<th>${m.label}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>`;
 
-    $('sessTable').innerHTML = `<table><thead><tr><th>Дата</th><th>Условие</th><th>День</th><th>Сон</th><th>Стресс</th>
-      ${CORE.map((m) => `<th>${m.label}</th>`).join('')}<th>Индекс</th></tr></thead><tbody>
-      ${[...scored].reverse().map((s) => `<tr><td>${new Date(s.date).toLocaleDateString('ru-RU')}</td><td>${esc(s.cond)}</td><td>${s.day ?? ''}</td>
-        <td>${s.sleep_h ?? ''}</td><td>${s.stress ?? ''}</td>${CORE.map((m) => `<td>${s[m.key] ?? '—'}</td>`).join('')}<td>${r2(s.index) ?? '—'}</td></tr>`).join('')}
+    $('sessTable').innerHTML = `<table><thead><tr><th>Дата</th><th>Условие</th><th>Индекс</th><th>День</th><th>Сон</th><th>Стресс</th>
+      ${CORE.map((m) => `<th>${m.label}</th>`).join('')}</tr></thead><tbody>
+      ${[...scored].reverse().map((s) => `<tr><td>${new Date(s.date).toLocaleDateString('ru-RU')}</td><td>${esc(s.cond)}</td><td>${r2(s.index) ?? '—'}</td>
+        <td>${s.day ?? ''}</td><td>${s.sleep_h ?? ''}</td><td>${s.stress ?? ''}</td>${CORE.map((m) => `<td>${s[m.key] ?? '—'}</td>`).join('')}</tr>`).join('')}
       </tbody></table>`;
   }
   $('rName').onchange = renderResults;
