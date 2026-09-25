@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Когнитивный тест</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --card: #ffffff; --text: #1b1f24; --muted: #5d6673;
+    --line: #dde1e6; --accent: #1f6feb; --accent-text: #ffffff;
+    --good: #1a7f37; --bad: #cf222e; --wait: #b42318; --go: #1a7f37;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1216; --card: #171b21; --text: #e6e9ed; --muted: #9aa4b1;
+      --line: #2b313a; --accent: #4c8dff; --accent-text: #0f1216;
+      --good: #3fb950; --bad: #f85149; --wait: #b42318; --go: #2ea043;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 16px; }
+  h1 { font-size: 22px; margin: 4px 0 12px; }
+  h2 { font-size: 18px; margin: 0 0 12px; }
+  nav { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  nav button { background: var(--card); color: var(--text); border: 1px solid var(--line); }
+  nav button.active { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  label { display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: var(--muted); }
+  input, select, textarea { font: inherit; color: var(--text); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; }
+  button { font: inherit; cursor: pointer; border: 0; border-radius: 8px; padding: 10px 16px;
+    background: var(--accent); color: var(--accent-text); }
+  button.secondary { background: transparent; color: var(--text); border: 1px solid var(--line); }
+  button:disabled { opacity: .5; cursor: default; }
+  .muted { color: var(--muted); font-size: 14px; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .hidden { display: none !important; }
+  .big { font-size: 40px; font-weight: 700; text-align: center; margin: 16px 0; font-variant-numeric: tabular-nums; }
+  .timer { font-variant-numeric: tabular-nums; color: var(--muted); }
+  #rtBox { height: 220px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 600; color: #fff; user-select: none; touch-action: manipulation; background: var(--wait); }
+  #rtBox.go { background: var(--go); }
+  .answer { font-size: 28px; text-align: center; width: 100%; max-width: 260px; }
+  .stroopWord { font-size: 48px; font-weight: 800; text-align: center; margin: 24px 0; letter-spacing: 1px; }
+  .colorBtns { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .colorBtns button { padding: 16px; font-size: 18px; background: var(--bg); color: var(--text); border: 1px solid var(--line); }
+  .feedback { min-height: 22px; text-align: center; font-weight: 600; }
+  .ok { color: var(--good); } .err { color: var(--bad); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+  th, td { text-align: right; padding: 6px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; }
+  .tableWrap { overflow-x: auto; }
+  .bar { height: 10px; border-radius: 5px; background: var(--accent); }
+  .barTrack { position: relative; height: 10px; background: var(--bg); border-radius: 5px; min-width: 120px; }
+  .barTrack .zero { position: absolute; left: 50%; top: -3px; bottom: -3px; width: 1px; background: var(--muted); }
+  .barTrack .bar { position: absolute; top: 0; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Когнитивная батарея тестов</h1>
+  <nav>
+    <button data-tab="session" class="active">Сессия</button>
+    <button data-tab="results">Результаты</button>
+    <button data-tab="data">Данные</button>
+  </nav>
+
+  <!-- ===== Сессия ===== -->
+  <section id="tab-session">
+    <div class="card" id="setup">
+      <h2>Перед тестом</h2>
+      <p class="muted">Методика: docs/cognitive-methodology.md. Код условия — буква с конверта (A, B, C…),
+        <b>BASE</b> — исходный уровень без препаратов, <b>TRAIN</b> — тренировка (не входит в анализ),
+        <b>WASH</b> — отмывка.</p>
+      <div class="grid">
+        <label>Участник <input id="fName" placeholder="Имя"></label>
+        <label>Код условия <input id="fCond" placeholder="A / B / BASE / TRAIN" style="text-transform:uppercase"></label>
+        <label>День блока <input id="fDay" type="number" min="1" value="1"></label>
+        <label>Минут после приёма <input id="fDelay" type="number" min="0" value="60"></label>
+        <label>Сон, часов <input id="fSleep" type="number" step="0.5" min="0" max="16" value="7.5"></label>
+        <label>Качество сна (1–10) <input id="fSleepQ" type="number" min="1" max="10" value="7"></label>
+        <label>Кофе/чай, чашек сегодня <input id="fCaffeine" type="number" min="0" value="0"></label>
+        <label>Стресс (1–10) <input id="fStress" type="number" min="1" max="10" value="4"></label>
+        <label>Алкоголь накануне
+          <select id="fAlcohol"><option value="0">Нет</option><option value="1">Да</option></select></label>
+      </div>
+      <label style="margin-top:12px">Побочные эффекты / заметки <textarea id="fNotes" rows="2"></textarea></label>
+      <div class="row" style="margin-top:16px">
+        <button id="startBtn">Начать тесты (~12 мин)</button>
+        <span class="muted">Тихое место, телефон в беззвучный режим.</span>
+      </div>
+    </div>
+
+    <div class="card hidden" id="stage">
+      <div class="row" style="justify-content:space-between">
+        <h2 id="stageTitle"></h2><span class="timer" id="stageTimer"></span>
+      </div>
+      <div id="stageBody"></div>
+    </div>
+  </section>
+
+  <!-- ===== Результаты ===== -->
+  <section id="tab-results" class="hidden">
+    <div class="card">
+      <h2>Сравнение условий</h2>
+      <div class="grid">
+        <label>Участник <select id="rName"></select></label>
+        <label>Эталон для сравнения <select id="rRef"></select></label>
+      </div>
+      <p class="muted">Индекс — среднее z-оценок пяти тестов относительно сессий BASE
+        (если их меньше двух — относительно всех сессий, кроме TRAIN). Разница с эталоном
+        &lt; 0,3 — шум; 0,3–0,5 — слабый эффект; &gt; 0,5 в обоих повторах — заметный.</p>
+      <div class="tableWrap" id="resTable"></div>
+    </div>
+    <div class="card">
+      <h2>Все сессии</h2>
+      <div class="tableWrap" id="sessTable"></div>
+    </div>
+  </section>
+
+  <!-- ===== Данные ===== -->
+  <section id="tab-data" class="hidden">
+    <div class="card">
+      <h2>Экспорт и резервная копия</h2>
+      <p class="muted">Данные хранятся только в этом браузере. Регулярно сохраняйте копию.</p>
+      <div class="row">
+        <button id="csvBtn">Скачать CSV</button>
+        <button id="jsonBtn" class="secondary">Скачать копию (JSON)</button>
+        <label class="secondary" style="flex-direction:row;align-items:center;gap:8px">
+          Загрузить копию <input type="file" id="importFile" accept=".json"></label>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Удаление</h2>
+      <button id="clearBtn" class="secondary">Удалить все сессии</button>
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  'use strict';
+  const STORE_KEY = 'cognitiveSessions.v1';
+  const $ = (id) => document.getElementById(id);
+  const rand = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
+  const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  const median = (xs) => { if (!xs.length) return null; const s = [...xs].sort((a, b) => a - b); const m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+  const mean = (xs) => xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : null;
+  const sd = (xs) => { if (xs.length < 2) return null; const m = mean(xs); return Math.sqrt(xs.reduce((a, b) => a + (b - m) ** 2, 0) / (xs.length - 1)); };
+  const r1 = (x) => x == null ? null : Math.round(x * 10) / 10;
+  const r2 = (x) => x == null ? null : Math.round(x * 100) / 100;
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  // ---------- хранилище ----------
+  function loadSessions() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY) || '[]'); } catch (e) { return []; }
+  }
+  function saveSessions(list) {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(list)); return true; } catch (e) { return false; }
+  }
+
+  // ---------- вкладки ----------
+  document.querySelectorAll('nav button').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('nav button').forEach((x) => x.classList.toggle('active', x === b));
+    ['session', 'results', 'data'].forEach((t) => $('tab-' + t).classList.toggle('hidden', t !== b.dataset.tab));
+    if (b.dataset.tab === 'results') renderResults();
+  }));
+
+  try { $('fName').value = localStorage.getItem('cognitiveLastName') || ''; } catch (e) { /* нет хранилища */ }
+
+  // ---------- движок этапов ----------
+  let timerHandle = null;
+  function stage(title, html) {
+    $('stageTitle').textContent = title;
+    $('stageTimer').textContent = '';
+    $('stageBody').innerHTML = html;
+  }
+  function countdown(seconds, onEnd) {
+    const end = performance.now() + seconds * 1000;
+    clearInterval(timerHandle);
+    const tick = () => {
+      const left = Math.max(0, end - performance.now());
+      $('stageTimer').textContent = Math.ceil(left / 1000) + ' с';
+      if (left <= 0) { clearInterval(timerHandle); onEnd(); }
+    };
+    timerHandle = setInterval(tick, 200); tick();
+  }
+  function intro(title, text, onGo) {
+    stage(title, `<p>${text}</p><button id="goBtn">Начать</button>`);
+    $('goBtn').focus();
+    $('goBtn').onclick = onGo;
+  }
+  // Задание с вводом числа: gen() -> {q, a}
+  function numericTask(seconds, gen, done) {
+    const res = { correct: 0, wrong: 0, times: [] };
+    stage($('stageTitle').textContent, `
+      <div class="big" id="q"></div>
+      <div class="row" style="justify-content:center">
+        <input id="ans" class="answer" inputmode="numeric" autocomplete="off">
+        <button id="ansBtn">OK</button>
+      </div>
+      <div class="feedback" id="fb"></div>`);
+    let cur, shownAt;
+    const next = () => { cur = gen(); $('q').textContent = cur.q; $('ans').value = ''; $('ans').focus(); shownAt = performance.now(); };
+    const submit = () => {
+      const v = $('ans').value.trim();
+      if (v === '') return;
+      const ok = Number(v) === cur.a;
+      res.times.push(performance.now() - shownAt);
+      ok ? res.correct++ : res.wrong++;
+      $('fb').textContent = ok ? '✓' : '✗ ' + cur.a;
+      $('fb').className = 'feedback ' + (ok ? 'ok' : 'err');
+      next();
+    };
+    $('ansBtn').onclick = submit;
+    $('ans').addEventListener('keydown', (e) => { if (e.key === 'Enter') submit(); });
+    next();
+    countdown(seconds, () => done(res));
+  }
+
+  // ---------- 1. Реакция ----------
+  function testReaction(done) {
+    const TRIALS = 15, rts = []; let falseStarts = 0, trial = 0, goAt = null, waitT = null;
+    intro('1/5 · Реакция', 'Когда поле станет <b>зелёным</b>, как можно быстрее нажмите на него (или пробел). Нажатие на красное — фальстарт. 15 попыток.', () => {
+      stage('1/5 · Реакция', '<div id="rtBox">Ждите…</div><p class="muted" id="rtInfo"></p>');
+      const box = $('rtBox');
+      let armed = false;
+      const arm = () => {
+        armed = true; goAt = null; box.className = ''; box.textContent = 'Ждите…';
+        $('stageTimer').textContent = `${trial + 1}/${TRIALS}`;
+        waitT = setTimeout(() => { goAt = performance.now(); box.className = 'go'; box.textContent = 'ЖМИТЕ!'; }, rand(1500, 4000));
+      };
+      const hit = () => {
+        if (!armed) return; // пауза между попытками
+        armed = false;
+        if (goAt == null) { clearTimeout(waitT); falseStarts++; box.textContent = 'Рано!'; setTimeout(arm, 800); return; }
+        const rt = performance.now() - goAt; rts.push(rt); trial++;
+        box.className = ''; box.textContent = Math.round(rt) + ' мс'; goAt = null;
+        if (trial >= TRIALS) { cleanup(); setTimeout(() => done({ rt_median: Math.round(median(rts)), rt_false: falseStarts }), 600); }
+        else setTimeout(arm, 700);
+      };
+      const key = (e) => { if (e.code === 'Space') { e.preventDefault(); hit(); } };
+      const cleanup = () => { box.onpointerdown = null; document.removeEventListener('keydown', key); };
+      box.onpointerdown = hit;
+      document.addEventListener('keydown', key);
+      arm();
+    });
+  }
+
+  // ---------- 2. Устный счёт ----------
+  function genMath() {
+    const op = pick(['+', '−', '×', '÷']);
+    let a, b, ans;
+    if (op === '+') { a = rand(12, 89); b = rand(12, 89); ans = a + b; }
+    else if (op === '−') { a = rand(30, 99); b = rand(11, a - 1); ans = a - b; }
+    else if (op === '×') { a = rand(3, 12); b = rand(6, 19); ans = a * b; }
+    else { b = rand(3, 12); ans = rand(3, 15); a = b * ans; }
+    return { q: `${a} ${op} ${b}`, a: ans };
+  }
+  function testMath(done) {
+    intro('2/5 · Устный счёт', 'Решайте примеры быстро и без ошибок. Ответ — Enter. Время: 90 секунд.', () => {
+      $('stageTitle').textContent = '2/5 · Устный счёт';
+      numericTask(90, genMath, (r) => done({
+        math_cpm: r2(r.correct / 1.5), math_acc: r.correct + r.wrong ? r2(r.correct / (r.correct + r.wrong)) : null,
+      }));
+    });
+  }
+
+  // ---------- 3. Струп ----------
+  const COLORS = [
+    { name: 'КРАСНЫЙ', css: '#d62828' }, { name: 'СИНИЙ', css: '#1f6feb' },
+    { name: 'ЗЕЛЁНЫЙ', css: '#2a9d3a' }, { name: 'ЖЁЛТЫЙ', css: '#d4a106' },
+  ];
+  function testStroop(done) {
+    intro('3/5 · Струп', 'Нажимайте кнопку с <b>цветом шрифта</b>, а не с написанным словом. Время: 60 секунд.', () => {
+      stage('3/5 · Струп', `<div class="stroopWord" id="sw"></div>
+        <div class="colorBtns">${COLORS.map((c, i) => `<button data-i="${i}">${c.name.toLowerCase()}</button>`).join('')}</div>
+        <div class="feedback" id="fb"></div>`);
+      let correct = 0, wrong = 0, cur, shownAt; const cong = [], incong = [];
+      const next = () => {
+        const ink = rand(0, 3), word = Math.random() < 0.3 ? ink : (ink + rand(1, 3)) % 4;
+        cur = { ink, congruent: ink === word };
+        $('sw').textContent = COLORS[word].name; $('sw').style.color = COLORS[ink].css;
+        shownAt = performance.now();
+      };
+      $('stageBody').querySelectorAll('.colorBtns button').forEach((b) => b.onclick = () => {
+        const rt = performance.now() - shownAt, ok = Number(b.dataset.i) === cur.ink;
+        if (ok) { correct++; (cur.congruent ? cong : incong).push(rt); } else wrong++;
+        $('fb').textContent = ok ? '✓' : '✗'; $('fb').className = 'feedback ' + (ok ? 'ok' : 'err');
+        next();
+      });
+      next();
+      countdown(60, () => done({
+        stroop_cpm: correct, stroop_acc: correct + wrong ? r2(correct / (correct + wrong)) : null,
+        stroop_interf: cong.length && incong.length ? Math.round(median(incong) - median(cong)) : null,
+      }));
+    });
+  }
+
+  // ---------- 4. Цифровой ряд ----------
+  function testSpan(done) {
+    intro('4/5 · Память на цифры', 'Цифры появятся по одной. Запомните и введите ряд целиком. Длина растёт; две ошибки подряд на одной длине — конец.', () => {
+      let len = 4, fails = 0, best = 0;
+      const round = () => {
+        const seq = Array.from({ length: len }, () => rand(0, 9));
+        stage('4/5 · Память на цифры', `<div class="big" id="dig">&nbsp;</div><p class="muted" style="text-align:center">Длина: ${len}</p>`);
+        let i = 0;
+        const show = () => {
+          if (i < seq.length) {
+            $('dig').textContent = seq[i++];
+            setTimeout(() => { $('dig').innerHTML = '&nbsp;'; setTimeout(show, 250); }, 750);
+          } else ask();
+        };
+        const ask = () => {
+          stage('4/5 · Память на цифры', `<p style="text-align:center">Введите ${len} цифр:</p>
+            <div class="row" style="justify-content:center"><input id="ans" class="answer" inputmode="numeric" autocomplete="off"><button id="ansBtn">OK</button></div>`);
+          $('ans').focus();
+          const submit = () => {
+            const ok = $('ans').value.replace(/\D/g, '') === seq.join('');
+            if (ok) { best = len; len++; fails = 0; round(); }
+            else if (++fails >= 2 || len <= 3) done({ span_max: best });
+            else round();
+          };
+          $('ansBtn').onclick = submit;
+          $('ans').addEventListener('keydown', (e) => { if (e.key === 'Enter') submit(); });
+        };
+        setTimeout(show, 600);
+      };
+      round();
+    });
+  }
+
+  // ---------- 5. Логика: числовые закономерности ----------
+  function genSeries() {
+    const kind = rand(0, 5), n = 5; let s = [];
+    if (kind === 0) { const a = rand(1, 30), d = rand(2, 12) * pick([1, -1]); for (let i = 0; i <= n; i++) s.push(a + d * i); }
+    else if (kind === 1) { const a = rand(1, 5), q = rand(2, 3); for (let i = 0; i <= n; i++) s.push(a * q ** i); }
+    else if (kind === 2) { const a = rand(1, 10), d = rand(1, 4); let x = a, step = d; for (let i = 0; i <= n; i++) { s.push(x); x += step; step += d; } }
+    else if (kind === 3) { const a = rand(1, 6), b = rand(1, 6); s = [a, b]; while (s.length <= n) s.push(s[s.length - 1] + s[s.length - 2]); }
+    else if (kind === 4) { const a = rand(10, 40), d1 = rand(2, 9), d2 = rand(2, 9); let x = a; for (let i = 0; i <= n; i++) { s.push(x); x += i % 2 ? -d2 : d1; } }
+    else { const o = rand(1, 5); for (let i = 0; i <= n; i++) s.push((i + o) ** 2); }
+    return { q: s.slice(0, n).join(', ') + ', ?', a: s[n] };
+  }
+  function testLogic(done) {
+    intro('5/5 · Закономерности', 'Найдите следующее число в ряду. Ответ — Enter. Время: 120 секунд.', () => {
+      $('stageTitle').textContent = '5/5 · Закономерности';
+      numericTask(120, genSeries, (r) => done({
+        logic_cpm: r2(r.correct / 2), logic_acc: r.correct + r.wrong ? r2(r.correct / (r.correct + r.wrong)) : null,
+      }));
+    });
+  }
+
+  // ---------- сессия ----------
+  function readSetup() {
+    const num = (id) => { const v = parseFloat($(id).value); return isNaN(v) ? null : v; };
+    return {
+      id: Date.now().toString(36), date: new Date().toISOString(),
+      name: $('fName').value.trim() || 'Без имени',
+      cond: ($('fCond').value.trim() || 'BASE').toUpperCase(),
+      day: num('fDay'), delay_min: num('fDelay'), sleep_h: num('fSleep'), sleep_q: num('fSleepQ'),
+      caffeine: num('fCaffeine'), stress: num('fStress'), alcohol: Number($('fAlcohol').value),
+      notes: $('fNotes').value.trim(),
+    };
+  }
+
+  $('startBtn').onclick = () => {
+    const s = readSetup();
+    try { localStorage.setItem('cognitiveLastName', s.name); } catch (e) { /* нет хранилища */ }
+    $('setup').classList.add('hidden'); $('stage').classList.remove('hidden');
+    const tests = [testReaction, testMath, testStroop, testSpan, testLogic];
+    const run = (i) => {
+      if (i >= tests.length) return finish(s);
+      tests[i]((r) => { Object.assign(s, r); run(i + 1); });
+    };
+    run(0);
+  };
+
+  function finish(s) {
+    clearInterval(timerHandle);
+    stage('Самооценка', `<div class="grid">
+        <label>Концентрация (1–10) <input id="pFocus" type="number" min="1" max="10" value="6"></label>
+        <label>Настроение (1–10) <input id="pMood" type="number" min="1" max="10" value="6"></label>
+        <label>Что, по-вашему, вы приняли? <select id="pGuess">
+          <option value="unsure">Не знаю</option><option value="active">Активный препарат</option><option value="placebo">Плацебо</option></select></label>
+      </div><div class="row" style="margin-top:16px"><button id="saveBtn">Сохранить сессию</button></div>`);
+    $('saveBtn').onclick = () => {
+      s.focus = Number($('pFocus').value); s.mood = Number($('pMood').value); s.guess = $('pGuess').value;
+      const list = loadSessions(); list.push(s);
+      const saved = saveSessions(list);
+      stage('Готово', `<p>${saved ? 'Сессия сохранена.' : '<b class="err">Не удалось сохранить в браузере</b> — скачайте JSON ниже.'}</p>
+        <table>
+          <tr><td>Реакция, медиана</td><td>${s.rt_median} мс (фальстартов: ${s.rt_false})</td></tr>
+          <tr><td>Счёт</td><td>${s.math_cpm} верных/мин, точность ${pct(s.math_acc)}</td></tr>
+          <tr><td>Струп</td><td>${s.stroop_cpm} верных/мин, точность ${pct(s.stroop_acc)}</td></tr>
+          <tr><td>Память</td><td>ряд из ${s.span_max} цифр</td></tr>
+          <tr><td>Логика</td><td>${s.logic_cpm} верных/мин, точность ${pct(s.logic_acc)}</td></tr>
+        </table>
+        <div class="row" style="margin-top:16px"><button id="againBtn">Новая сессия</button>
+        ${saved ? '' : '<button id="dlOne" class="secondary">Скачать JSON</button>'}</div>`);
+      $('againBtn').onclick = () => { $('stage').classList.add('hidden'); $('setup').classList.remove('hidden'); };
+      if (!saved) $('dlOne').onclick = () => download('session.json', JSON.stringify([s], null, 2), 'application/json');
+    };
+  }
+  const pct = (x) => x == null ? '—' : Math.round(x * 100) + '%';
+
+  // ---------- анализ ----------
+  // Показатели, из которых складывается индекс; sign = -1, если меньше — лучше.
+  const CORE = [
+    { key: 'rt_median', label: 'Реакция, мс', sign: -1 },
+    { key: 'math_cpm', label: 'Счёт, /мин', sign: 1 },
+    { key: 'stroop_cpm', label: 'Струп, /мин', sign: 1 },
+    { key: 'span_max', label: 'Память, цифр', sign: 1 },
+    { key: 'logic_cpm', label: 'Логика, /мин', sign: 1 },
+  ];
+
+  function withIndex(sessions) {
+    const pool = sessions.filter((s) => s.cond !== 'TRAIN');
+    const base = pool.filter((s) => s.cond === 'BASE');
+    const ref = base.length >= 2 ? base : pool;
+    const stats = {};
+    CORE.forEach((m) => {
+      const xs = ref.map((s) => s[m.key]).filter((v) => typeof v === 'number');
+      stats[m.key] = { m: mean(xs), sd: sd(xs) || 1 };
+    });
+    return pool.map((s) => {
+      const zs = CORE.map((m) => typeof s[m.key] === 'number' && stats[m.key].m != null
+        ? m.sign * (s[m.key] - stats[m.key].m) / stats[m.key].sd : null).filter((z) => z != null);
+      return { ...s, index: zs.length ? mean(zs) : null };
+    });
+  }
+
+  function renderResults() {
+    const all = loadSessions();
+    const names = [...new Set(all.map((s) => s.name))];
+    const rName = $('rName'), prevName = rName.value;
+    rName.innerHTML = names.map((n) => `<option>${esc(n)}</option>`).join('');
+    if (names.includes(prevName)) rName.value = prevName;
+    const mine = all.filter((s) => s.name === rName.value);
+    const scored = withIndex(mine);
+    const conds = [...new Set(scored.map((s) => s.cond))].sort();
+    const rRef = $('rRef'), prevRef = rRef.value;
+    rRef.innerHTML = conds.map((c) => `<option>${esc(c)}</option>`).join('');
+    rRef.value = conds.includes(prevRef) ? prevRef : (conds.includes('PLA') ? 'PLA' : conds.includes('BASE') ? 'BASE' : conds[0] || '');
+
+    if (!scored.length) {
+      $('resTable').innerHTML = '<p class="muted">Нет сессий для анализа (TRAIN не учитывается).</p>';
+      $('sessTable').innerHTML = '';
+      return;
+    }
+    const byCond = (c) => scored.filter((s) => s.cond === c);
+    const refIdx = mean(byCond(rRef.value).map((s) => s.index).filter((v) => v != null));
+    const rows = conds.map((c) => {
+      const ss = byCond(c), idxs = ss.map((s) => s.index).filter((v) => v != null);
+      const idx = mean(idxs), diff = idx != null && refIdx != null ? idx - refIdx : null;
+      const w = diff == null ? 0 : Math.min(50, Math.abs(diff) * 25);
+      const bar = `<div class="barTrack"><div class="zero"></div><div class="bar" style="${diff >= 0 ? 'left:50%' : `left:${50 - w}%`};width:${w}%;background:${diff >= 0 ? 'var(--good)' : 'var(--bad)'}"></div></div>`;
+      const verdict = diff == null || c === rRef.value ? '' : Math.abs(diff) < 0.3 ? 'шум' : Math.abs(diff) <= 0.5 ? 'слабый' : 'заметный';
+      return `<tr><td><b>${esc(c)}</b></td><td>${ss.length}</td>
+        ${CORE.map((m) => `<td>${r1(mean(ss.map((s) => s[m.key]).filter((v) => typeof v === 'number')))}</td>`).join('')}
+        <td>${r2(idx)} ± ${r2(sd(idxs)) ?? '—'}</td><td>${diff == null ? '—' : (diff > 0 ? '+' : '') + r2(diff)}</td><td>${bar}</td><td>${verdict}</td></tr>`;
+    }).join('');
+    $('resTable').innerHTML = `<table><thead><tr><th>Условие</th><th>n</th>${CORE.map((m) => `<th>${m.label}</th>`).join('')}
+      <th>Индекс</th><th>Δ к эталону</th><th></th><th>Оценка</th></tr></thead><tbody>${rows}</tbody></table>`;
+
+    $('sessTable').innerHTML = `<table><thead><tr><th>Дата</th><th>Условие</th><th>День</th><th>Сон</th><th>Стресс</th>
+      ${CORE.map((m) => `<th>${m.label}</th>`).join('')}<th>Индекс</th></tr></thead><tbody>
+      ${[...scored].reverse().map((s) => `<tr><td>${new Date(s.date).toLocaleDateString('ru-RU')}</td><td>${esc(s.cond)}</td><td>${s.day ?? ''}</td>
+        <td>${s.sleep_h ?? ''}</td><td>${s.stress ?? ''}</td>${CORE.map((m) => `<td>${s[m.key] ?? '—'}</td>`).join('')}<td>${r2(s.index) ?? '—'}</td></tr>`).join('')}
+      </tbody></table>`;
+  }
+  $('rName').onchange = renderResults;
+  $('rRef').onchange = renderResults;
+
+  // ---------- данные ----------
+  const FIELDS = ['date', 'name', 'cond', 'day', 'delay_min', 'sleep_h', 'sleep_q', 'caffeine', 'stress', 'alcohol',
+    'rt_median', 'rt_false', 'math_cpm', 'math_acc', 'stroop_cpm', 'stroop_acc', 'stroop_interf',
+    'span_max', 'logic_cpm', 'logic_acc', 'focus', 'mood', 'guess', 'notes'];
+  function download(name, text, type) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([text], { type }));
+    a.download = name; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }
+  $('csvBtn').onclick = () => {
+    const cell = (v) => v == null ? '' : /[",;\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v);
+    const csv = [FIELDS.join(','), ...loadSessions().map((s) => FIELDS.map((f) => cell(s[f])).join(','))].join('\n');
+    download('cognitive-sessions.csv', '﻿' + csv, 'text/csv');
+  };
+  $('jsonBtn').onclick = () => download('cognitive-sessions.json', JSON.stringify(loadSessions(), null, 2), 'application/json');
+  $('importFile').onchange = (e) => {
+    const f = e.target.files[0]; if (!f) return;
+    f.text().then((t) => {
+      const incoming = JSON.parse(t);
+      if (!Array.isArray(incoming)) throw new Error('bad');
+      const list = loadSessions(), ids = new Set(list.map((s) => s.id));
+      const added = incoming.filter((s) => s && s.id && !ids.has(s.id));
+      saveSessions(list.concat(added));
+      alert(`Добавлено сессий: ${added.length}`);
+    }).catch(() => alert('Не удалось прочитать файл.'));
+    e.target.value = '';
+  };
+  $('clearBtn').onclick = () => {
+    if (confirm('Удалить все сохранённые сессии? Сначала сделайте резервную копию.')) { saveSessions([]); renderResults(); }
+  };
+})();
+</script>
+</body>
+</html>
