@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Static site generator for onsite.uz (RU / UZ / EN).
+"""Static site generator for antiskalant.uz (RU / UZ / EN).
 
 Run:  python3 build.py
 Output: ./site/  (upload the contents of this folder to the web server root)
@@ -18,7 +18,7 @@ OUT = os.path.join(HERE, "site")
 # CONFIG — replace with company contacts if they differ
 # --------------------------------------------------------------------------
 CONFIG = {
-    "base": "https://onsite.uz",
+    "base": "https://antiskalant.uz",
     "company": "ONSITE",
     "phone": "+998901888557",
     "phone_display": "+998 90 188 85 57",
@@ -276,7 +276,7 @@ CONTENT = {
          "res": "Накипеобразование на оборудовании заметно снизилось. Итоговые результаты подводить пока рано — проект продолжается."},
     ],
     "news": [
-        ["Сентябрь 2026", "Запущен сайт onsite.uz", "Информация о продуктах CLEAN RO и CLEAN RO-1, отраслях и сервисе — на русском, узбекском и английском языках."],
+        ["Сентябрь 2026", "Запущен сайт antiskalant.uz", "Информация о продуктах CLEAN RO и CLEAN RO-1, отраслях и сервисе — на русском, узбекском и английском языках."],
         ["Июнь 2026", "Запущена обработка антискалантом CLEAN RO-1 для Refresh Water", "На производстве бутилированной воды Refresh Water запущена обработка системы обратного осмоса антискалантом CLEAN RO-1. Накипеобразование на оборудовании уже заметно снизилось — итоговые результаты пока подводить рано."],
         ["2026", "Поставка антискаланта для АО «НГМК», ГМЗ-3", "Поставлено более 10 тонн антискаланта; расходы на водоподготовку снижены на 15%."],
         ["2026", "Подобран антискалант для SamAvto", "Для системы обратного осмоса подобран более эффективный антискалант; результат подтверждён официальным письмом предприятия."],
@@ -511,7 +511,7 @@ CONTENT = {
          "res": "Uskunada cho'kindi hosil bo'lishi sezilarli kamaydi. Yakuniy natijalar haqida gapirish hali erta — loyiha davom etmoqda."},
     ],
     "news": [
-        ["2026-yil sentabr", "onsite.uz sayti ishga tushirildi", "CLEAN RO va CLEAN RO-1 mahsulotlari, tarmoqlar va servis haqida ma'lumot — rus, o'zbek va ingliz tillarida."],
+        ["2026-yil sentabr", "antiskalant.uz sayti ishga tushirildi", "CLEAN RO va CLEAN RO-1 mahsulotlari, tarmoqlar va servis haqida ma'lumot — rus, o'zbek va ingliz tillarida."],
         ["2026-yil iyun", "Refresh Water uchun CLEAN RO-1 antiskalanti bilan ishlov berish ishga tushirildi", "Refresh Water suv ishlab chiqarish korxonasida teskari osmos tizimiga CLEAN RO-1 antiskalanti bilan ishlov berish boshlandi. Uskunada cho'kindi hosil bo'lishi allaqachon sezilarli kamaydi — yakuniy natijalar haqida gapirish hali erta."],
         ["2026", "AO «NGMK», GMZ-3 uchun antiskalant yetkazib berildi", "10 tonnadan ortiq antiskalant yetkazib berildi; suv tayyorlash xarajatlari 15% ga kamaydi."],
         ["2026", "SamAvto uchun antiskalant tanlandi", "Teskari osmos tizimi uchun samaraliroq antiskalant tanlandi; natija korxonaning rasmiy xati bilan tasdiqlangan."],
@@ -746,7 +746,7 @@ CONTENT = {
          "res": "Scaling on the equipment has noticeably decreased. It is too early for final results — the project continues."},
     ],
     "news": [
-        ["September 2026", "onsite.uz goes live", "Information on CLEAN RO and CLEAN RO-1, industries and service — in Russian, Uzbek and English."],
+        ["September 2026", "antiskalant.uz goes live", "Information on CLEAN RO and CLEAN RO-1, industries and service — in Russian, Uzbek and English."],
         ["June 2026", "CLEAN RO-1 treatment launched at Refresh Water", "The reverse osmosis system at the Refresh Water bottled water plant is now treated with CLEAN RO-1. Scaling on the equipment has already noticeably decreased — it is too early for final results."],
         ["2026", "Antiscalant supplied to JSC NMMC, GMZ-3", "More than 10 tonnes of antiscalant supplied; water treatment costs cut by 15%."],
         ["2026", "Antiscalant selected for SamAvto", "A more effective antiscalant was selected for the reverse osmosis system; the result is confirmed by an official letter."],
@@ -918,7 +918,7 @@ def footer(lang):
     </div>
     <div class="footer-bottom">
       <span>{esc(t["footer_rights"])}</span>
-      <span>onsite.uz</span>
+      <span>antiskalant.uz</span>
     </div>
   </div>
 </footer>"""

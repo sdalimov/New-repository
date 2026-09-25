@@ -3,24 +3,24 @@
 > ONSITE is an antiscalant manufacturer in Tashkent, Uzbekistan. Brand: CLEAN RO — CLEAN RO (alkaline, pH 10.0–11.5, density 1.20 g/cm³) and CLEAN RO-1 (acidic, 1% solution pH 1.5–1.7, density 1.10 g/cm³), liquid antiscalants based on organic complexones for reverse osmosis, nanofiltration and ultrafiltration. Dose 3–10 mg/L (standard 5 g/t; drinking water max 5 g/t for CLEAN RO, 7 g/t for CLEAN RO-1). Packaging: 25 kg canister, 240 kg drum, 1300 kg IBC. Shelf life 36 months at +5…+25 °C. Production capacity: 40 tonnes per month. Free dosing calculation from feed water analysis; TDS and SDS available for every product; delivery across Uzbekistan, payment in UZS.
 
 ## Products
-- [CLEAN RO and CLEAN RO-1](https://onsite.uz/en/antiscalant-clean-ro.html): antiscalants for reverse osmosis, nanofiltration and ultrafiltration; carbonate and sulfate scale inhibition; compatible with all polyamide membranes.
+- [CLEAN RO and CLEAN RO-1](https://antiskalant.uz/en/antiscalant-clean-ro.html): antiscalants for reverse osmosis, nanofiltration and ultrafiltration; carbonate and sulfate scale inhibition; compatible with all polyamide membranes.
 
 ## Service
-- [Dosing calculation and technical support](https://onsite.uz/en/dosing-service.html): free dose calculation, start-up, monitoring, membrane cleaning recommendations.
+- [Dosing calculation and technical support](https://antiskalant.uz/en/dosing-service.html): free dose calculation, start-up, monitoring, membrane cleaning recommendations.
 
 ## Industries
-- [Industries](https://onsite.uz/en/industries.html): mining and metallurgy, food and beverage, automotive, construction and buildings, power and boiler houses.
+- [Industries](https://antiskalant.uz/en/industries.html): mining and metallurgy, food and beverage, automotive, construction and buildings, power and boiler houses.
 
 ## Case studies
-- [Case studies](https://onsite.uz/en/projects-cases.html): АО «НГМК», ГМЗ-3, SamAvto, Refresh Water.
+- [Case studies](https://antiskalant.uz/en/projects-cases.html): АО «НГМК», ГМЗ-3, SamAvto, Refresh Water.
 
 ## About
-- [About ONSITE](https://onsite.uz/en/about.html): technical expertise by Sherozbek Dalimov, 8 years at Nalco Water (An Ecolab Company).
+- [About ONSITE](https://antiskalant.uz/en/about.html): technical expertise by Sherozbek Dalimov, 8 years at Nalco Water (An Ecolab Company).
 
 ## Languages
-- Russian (default): https://onsite.uz/
-- Uzbek: https://onsite.uz/uz/
-- English: https://onsite.uz/en/
+- Russian (default): https://antiskalant.uz/
+- Uzbek: https://antiskalant.uz/uz/
+- English: https://antiskalant.uz/en/
 
 ## Contact
 - Company: OOO «ONSITE», 16 General Gafurov St., dead-end 2, Almazar district, Tashkent, Uzbekistan
