@@ -15,7 +15,14 @@
       --bg: #0f1216; --card: #171b21; --text: #e6e9ed; --muted: #9aa4b1;
       --line: #2b313a; --accent: #4c8dff; --accent-text: #0f1216;
       --good: #3fb950; --bad: #f85149; --wait: #b42318; --go: #2ea043;
+      color-scheme: dark;
     }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1216; --card: #171b21; --text: #e6e9ed; --muted: #9aa4b1;
+    --line: #2b313a; --accent: #4c8dff; --accent-text: #0f1216;
+    --good: #3fb950; --bad: #f85149; --wait: #b42318; --go: #2ea043;
+    color-scheme: dark;
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--text);
@@ -125,17 +132,35 @@
   <section id="tab-data" class="hidden">
     <div class="card">
       <h2>Экспорт и резервная копия</h2>
-      <p class="muted">Данные хранятся только в этом браузере. Регулярно сохраняйте копию.</p>
+      <p class="muted">Данные хранятся только в этом браузере. Регулярно сохраняйте копию.
+        Если скачивание не срабатывает, нажмите «Показать» и скопируйте текст.</p>
       <div class="row">
         <button id="csvBtn">Скачать CSV</button>
         <button id="jsonBtn" class="secondary">Скачать копию (JSON)</button>
-        <label class="secondary" style="flex-direction:row;align-items:center;gap:8px">
-          Загрузить копию <input type="file" id="importFile" accept=".json"></label>
       </div>
+      <div class="row" style="margin-top:8px">
+        <button id="showCsvBtn" class="secondary">Показать CSV</button>
+        <button id="showJsonBtn" class="secondary">Показать JSON</button>
+        <button id="copyBtn" class="secondary hidden">Копировать</button>
+      </div>
+      <textarea id="dataOut" class="hidden" rows="8" readonly style="width:100%;margin-top:8px;font-family:ui-monospace,monospace;font-size:12px"></textarea>
+      <p class="muted" id="dataStatus" role="status"></p>
+    </div>
+    <div class="card">
+      <h2>Загрузить копию</h2>
+      <label>Файл JSON <input type="file" id="importFile" accept=".json"></label>
+      <label style="margin-top:8px">или вставьте текст JSON <textarea id="importText" rows="4"></textarea></label>
+      <div class="row" style="margin-top:8px"><button id="importTextBtn" class="secondary">Загрузить из текста</button></div>
+      <p class="muted" id="importStatus" role="status"></p>
     </div>
     <div class="card">
       <h2>Удаление</h2>
       <button id="clearBtn" class="secondary">Удалить все сессии</button>
+      <div class="row hidden" id="clearConfirm" style="margin-top:8px">
+        <span>Удалить все сессии без возможности восстановления?</span>
+        <button id="clearYes" style="background:var(--bad)">Да, удалить</button>
+        <button id="clearNo" class="secondary">Отмена</button>
+      </div>
     </div>
   </section>
 </main>
@@ -484,27 +509,48 @@
     a.download = name; a.click();
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   }
-  $('csvBtn').onclick = () => {
+  const toCsv = () => {
     const cell = (v) => v == null ? '' : /[",;\n]/.test(String(v)) ? `"${String(v).replace(/"/g, '""')}"` : String(v);
-    const csv = [FIELDS.join(','), ...loadSessions().map((s) => FIELDS.map((f) => cell(s[f])).join(','))].join('\n');
-    download('cognitive-sessions.csv', '﻿' + csv, 'text/csv');
+    return [FIELDS.join(','), ...loadSessions().map((s) => FIELDS.map((f) => cell(s[f])).join(','))].join('\n');
   };
-  $('jsonBtn').onclick = () => download('cognitive-sessions.json', JSON.stringify(loadSessions(), null, 2), 'application/json');
-  $('importFile').onchange = (e) => {
-    const f = e.target.files[0]; if (!f) return;
-    f.text().then((t) => {
+  const toJson = () => JSON.stringify(loadSessions(), null, 2);
+  $('csvBtn').onclick = () => download('cognitive-sessions.csv', '﻿' + toCsv(), 'text/csv');
+  $('jsonBtn').onclick = () => download('cognitive-sessions.json', toJson(), 'application/json');
+  const showData = (text) => {
+    $('dataOut').value = text;
+    $('dataOut').classList.remove('hidden'); $('copyBtn').classList.remove('hidden');
+    $('dataStatus').textContent = '';
+  };
+  $('showCsvBtn').onclick = () => showData(toCsv());
+  $('showJsonBtn').onclick = () => showData(toJson());
+  $('copyBtn').onclick = () => {
+    const done = () => { $('dataStatus').textContent = 'Скопировано.'; };
+    const fallback = () => { $('dataOut').select(); $('dataStatus').textContent = 'Текст выделен — скопируйте его вручную.'; };
+    try { navigator.clipboard.writeText($('dataOut').value).then(done, fallback); } catch (e) { fallback(); }
+  };
+
+  function importText(t) {
+    try {
       const incoming = JSON.parse(t);
       if (!Array.isArray(incoming)) throw new Error('bad');
       const list = loadSessions(), ids = new Set(list.map((s) => s.id));
       const added = incoming.filter((s) => s && s.id && !ids.has(s.id));
       saveSessions(list.concat(added));
-      alert(`Добавлено сессий: ${added.length}`);
-    }).catch(() => alert('Не удалось прочитать файл.'));
+      $('importStatus').textContent = `Добавлено сессий: ${added.length}.`;
+    } catch (e) {
+      $('importStatus').textContent = 'Не удалось прочитать данные: нужен JSON, выгруженный этим приложением.';
+    }
+  }
+  $('importFile').onchange = (e) => {
+    const f = e.target.files[0]; if (!f) return;
+    f.text().then(importText);
     e.target.value = '';
   };
-  $('clearBtn').onclick = () => {
-    if (confirm('Удалить все сохранённые сессии? Сначала сделайте резервную копию.')) { saveSessions([]); renderResults(); }
-  };
+  $('importTextBtn').onclick = () => importText($('importText').value);
+
+  $('clearBtn').onclick = () => $('clearConfirm').classList.remove('hidden');
+  $('clearNo').onclick = () => $('clearConfirm').classList.add('hidden');
+  $('clearYes').onclick = () => { saveSessions([]); $('clearConfirm').classList.add('hidden'); renderResults(); };
 })();
 </script>
 </body>
