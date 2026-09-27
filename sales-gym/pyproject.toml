@@ -1,0 +1,26 @@
+[project]
+name = "sales-gym"
+version = "0.1.0"
+description = "Тренажёры B2B-продаж: Telegram-бот + дашборд"
+requires-python = ">=3.11"
+dependencies = [
+    "aiogram>=3.20,<4",
+    "anthropic>=1.8,<2",
+    "sqlalchemy[asyncio]>=2.0",
+    "alembic>=1.13",
+    "asyncpg>=0.29",
+    "aiosqlite>=0.20",
+    "pydantic>=2.7",
+    "pydantic-settings>=2.3",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.23"]
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
