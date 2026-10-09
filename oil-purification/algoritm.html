@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Алгоритм очистки масла</title>
+<style>
+  @page { size: A4 portrait; margin: 0; }
+  :root {
+    --ink: #1d2433; --muted: #5b6475; --line: #8a93a6;
+    --s1: #e8f0fe; --s1b: #3b6fd8;
+    --s2: #e7f6ec; --s2b: #2e8b57;
+    --s3: #fff4e0; --s3b: #d98a00;
+    --s4: #f1ecfb; --s4b: #7a52c7;
+    --dec: #fffbe6; --decb: #c9a400;
+    --stop: #fdecec; --stopb: #c0392b;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #fff; }
+  body {
+    width: 210mm; height: 297mm; padding: 7mm 8mm 6mm;
+    font-family: "DejaVu Sans", "Liberation Sans", Arial, sans-serif;
+    color: var(--ink); font-size: 7.6pt; line-height: 1.28;
+    display: flex; flex-direction: column; gap: 2.2mm; overflow: hidden;
+  }
+  h1 { margin: 0; font-size: 12.5pt; white-space: nowrap; letter-spacing: .2px; }
+  .sub { color: var(--muted); font-size: 7.8pt; margin-top: .6mm; }
+  .head { display: flex; justify-content: space-between; align-items: flex-end;
+          border-bottom: 1.4px solid var(--ink); padding-bottom: 1.6mm; }
+  .head .goal { text-align: right; font-size: 7.6pt; color: var(--muted); max-width: 62mm; }
+  .head .goal b { color: var(--ink); }
+
+  .stage { border-radius: 2.5mm; padding: 2mm 2.4mm 2.2mm; border: 1.2px solid; }
+  .stage > .st { font-weight: bold; font-size: 8.6pt; margin-bottom: 1.4mm; display: flex; gap: 1.6mm; align-items: center; }
+  .stage > .st .n { display: inline-flex; width: 4.6mm; height: 4.6mm; border-radius: 50%;
+                    color: #fff; align-items: center; justify-content: center; font-size: 7.6pt; }
+  .st1 { background: #f7faff; border-color: var(--s1b); } .st1 .n { background: var(--s1b); }
+  .st2 { background: #f6fcf8; border-color: var(--s2b); } .st2 .n { background: var(--s2b); }
+  .st3 { background: #fffaf1; border-color: var(--s3b); } .st3 .n { background: var(--s3b); }
+  .st4 { background: #f9f6fe; border-color: var(--s4b); } .st4 .n { background: var(--s4b); }
+
+  .box { background: #fff; border: 1px solid var(--line); border-radius: 1.6mm; padding: 1.2mm 1.8mm; }
+  .box b { font-weight: bold; }
+  .st1 .box { border-color: #9db8ef; } .st2 .box { border-color: #9fd2b3; }
+  .st3 .box { border-color: #f0c879; } .st4 .box { border-color: #c2acec; }
+  .dec { background: var(--dec); border: 1.3px solid var(--decb); border-radius: 1.6mm; padding: 1.2mm 1.8mm; }
+  .dec::before { content: "◆ "; color: var(--decb); }
+  .stop { background: var(--stop); border: 1.2px solid var(--stopb); border-radius: 1.6mm; padding: 1.2mm 1.8mm; }
+  .ok { background: #e9f8ef; border: 1.2px solid #2e8b57; border-radius: 1.6mm; padding: 1.2mm 1.8mm; }
+
+  .down { text-align: center; color: var(--line); font-size: 8pt; line-height: 1; margin: .5mm 0; }
+  .lbl { font-weight: bold; font-size: 7pt; padding: 0 1mm; border-radius: 1mm; }
+  .yes { color: #1f7a45; } .no { color: #b03a2e; }
+
+  .row { display: flex; gap: 1.8mm; align-items: stretch; }
+  .row > * { flex: 1; }
+  .arrow-r { flex: 0 0 auto; align-self: center; color: var(--line); font-size: 9pt; }
+  .branch { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.6mm; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2.2mm; }
+  .steps { display: flex; flex-direction: column; }
+  .k { color: var(--muted); }
+  .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 7.2pt; }
+  .foot { display: grid; grid-template-columns: 1.15fr 1fr; gap: 2.2mm; }
+  .note { border: 1px dashed var(--line); border-radius: 2mm; padding: 1.6mm 2mm; background: #fafbfc; }
+  .note h3 { margin: 0 0 .8mm; font-size: 8pt; }
+  .note ul { margin: 0; padding-left: 3.6mm; }
+  .note li { margin: .2mm 0; }
+  .tiny { font-size: 6.6pt; color: var(--muted); text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="head">
+  <div>
+    <h1>Алгоритм: очистка масел для кормового жира</h1>
+    <div class="sub">Адсорбент — синтетический силикат магния из жидкого стекла (аналог Magnesol)</div>
+  </div>
+  <div class="goal">Цель: масло по требованиям комбикормового завода<br>при себестоимости очистки <b>≤ 250–300 сум/кг</b></div>
+</div>
+
+<!-- ЭТАП 1 -->
+<div class="stage st1">
+  <div class="st"><span class="n">1</span>Исходные данные</div>
+  <div class="row">
+    <div class="box"><b>1.1 Требования покупателя</b><br>кислотное число (КЧ), перекисное (ПЧ), влага и примеси (MIU), цвет, документы</div>
+    <div class="arrow-r">➜</div>
+    <div class="dec"><b>1.2 Масла фритюрные (б/у)?</b><br><span class="lbl yes">Нет</span> → 1.3 &nbsp; <span class="lbl no">Да</span> → разрешено ли в корм?</div>
+    <div class="arrow-r">➜</div>
+    <div class="box"><b>1.3 Анализ сырья</b> (2–3 партии)<br>КЧ, ПЧ, влага, примеси, цвет</div>
+  </div>
+  <div class="row" style="margin-top:1.4mm">
+    <div class="stop"><b>Фритюр не разрешён в корм</b> (уточнить в ветконтроле; в ЕС запрещено) → <b>СТОП</b>: другой сбыт (технические цели, биодизель)</div>
+    <div class="dec" style="flex:1.25"><b>1.4 Сырьё уже соответствует?</b><br><span class="lbl yes">Да</span> → отстой, сушка 100–105 °C, фильтрация → <b>сдать</b><br><span class="lbl no">Нет</span> → что не так? ↓</div>
+  </div>
+  <div class="branch" style="margin-top:1.4mm">
+    <div class="box"><b>Влага / примеси</b> → отстаивание, нагрев 100–105 °C, фильтрация</div>
+    <div class="box"><b>КЧ / ПЧ / полярные</b> → <b>силикат магния</b> (этапы 2–3)</div>
+    <div class="box"><b>Цвет</b> → силикат магния + отбельная глина 0,5 %</div>
+  </div>
+</div>
+
+<div class="cols">
+  <!-- ЭТАП 2 -->
+  <div class="stage st2">
+    <div class="st"><span class="n">2</span>Получение силиката магния (лаборатория)</div>
+    <div class="steps">
+      <div class="box"><b>2.1 Сырьё:</b> жидкое стекло <b>модуль 2,5–2,8</b>, плотн. 1,45 (паспорт, образец 1–2 л). Проба: разбавить 1:4, сутки — осадка нет?</div>
+      <div class="down">▼</div>
+      <div class="box"><b>2.2 Титровать Na₂O:</b> 2 г стекла + 50 мл воды, 0,5 М HCl, метилоранж<br><span class="mono">Na₂O, % = 1,55·V / m</span></div>
+      <div class="down">▼</div>
+      <div class="box"><b>2.3 Расчёт соли</b> на 100 г стекла:<br><span class="mono">MgSO₄·7H₂O, г = 4,0 × Na₂O% × 1,05</span><br><span class="k">(модуль 2,5 ≈ 48 г, 2,8 ≈ 44 г; безводный — вдвое меньше)</span></div>
+      <div class="down">▼</div>
+      <div class="box"><b>2.4 Растворы:</b> А — 100 г стекла + 400 мл воды; Б — соль в 300 мл воды</div>
+      <div class="down">▼</div>
+      <div class="box"><b>2.5 Осаждение:</b> Б медленно в А, 30–40 °C, сильно мешать 1–2 ч</div>
+      <div class="down">▼</div>
+      <div class="box"><b>2.6 Промывка:</b> Бюхнер, тёплая вода 4–6 раз, до слабой мути с BaCl₂</div>
+      <div class="down">▼</div>
+      <div class="box"><b>2.7 Сушка 105–120 °C</b> (не прокаливать!) → помол → сито &lt; 100 мкм</div>
+      <div class="down">▼</div>
+      <div class="dec"><b>2.8 pH суспензии 5 % = 8–9?</b><br><span class="lbl no">&gt; 9,5</span> → домыть (п. 2.6) &nbsp; <span class="lbl yes">Да</span> → выход ≈ 40 г → этап 3</div>
+    </div>
+  </div>
+
+  <!-- ЭТАП 3 -->
+  <div class="stage st3">
+    <div class="st"><span class="n">3</span>Опыт на масле</div>
+    <div class="steps">
+      <div class="box"><b>3.1 Режим:</b> 100 г масла, 90–120 °C, перемешивание 20–30 мин, фильтрация горячим</div>
+      <div class="down">▼</div>
+      <div class="box"><b>3.2 Варианты:</b><br>
+        ① контроль без адсорбента<br>
+        ② силикат Mg 0,3 % &nbsp;③ 0,5 % &nbsp;④ 1 % &nbsp;⑤ 2 %<br>
+        ⑥ лучший + глина 0,5 % (если нужен цвет)<br>
+        ⑦ лучший + сода 0,1–0,3 % (по US5597600)</div>
+      <div class="down">▼</div>
+      <div class="box"><b>3.3 Измерить:</b> КЧ (KOH, фенолфталеин), ПЧ (йодометрия), цвет, маслоёмкость осадка, время фильтрации</div>
+      <div class="down">▼</div>
+      <div class="dec"><b>3.4 Требования выполнены при дозе ≤ 0,5 %?</b></div>
+      <div class="down">▼</div>
+      <div class="ok"><span class="lbl yes">Да</span> → этап 4</div>
+      <div style="height:1.4mm"></div>
+      <div class="stop"><span class="lbl no">Нет, КЧ высокое</span> → сначала щелочная нейтрализация, потом адсорбент → повторить 3.1</div>
+      <div style="height:1.4mm"></div>
+      <div class="stop"><span class="lbl no">Нет, нужна доза &gt; 0,5 %</span> → удешевить Mg-соль:<br>удобрение MgSO₄ (опт), бишофит, MgO + H₂SO₄ — или купить готовый E553a</div>
+    </div>
+  </div>
+</div>
+
+<!-- ЭТАП 4 -->
+<div class="stage st4">
+  <div class="st"><span class="n">4</span>Внедрение</div>
+  <div class="row">
+    <div class="box"><b>4.1 Себестоимость</b><br>адсорбент + потери масла ≤ 300 сум/кг</div>
+    <div class="arrow-r">➜</div>
+    <div class="box"><b>4.2 Безопасность</b><br>анализ продукта и масла на Fe и тяжёлые металлы</div>
+    <div class="arrow-r">➜</div>
+    <div class="box"><b>4.3 Пилот 20–50 кг</b><br>подтвердить режим и выход</div>
+    <div class="arrow-r">➜</div>
+    <div class="box"><b>4.4 Образец покупателю</b><br>согласовать спецификацию</div>
+    <div class="arrow-r">➜</div>
+    <div class="ok"><b>4.5 Поставки</b></div>
+  </div>
+</div>
+
+<div class="foot">
+  <div class="note">
+    <h3>Экономика (текущие цены)</h3>
+    <ul>
+      <li>Жидкое стекло 2 800 сум/кг (модуль 2,5) + MgSO₄·7H₂O 10 000 сум/кг (0,48 кг на 1 кг стекла)</li>
+      <li>Продукт ≈ 0,41 кг на 1 кг стекла → <b>≈ 26 000 сум/кг</b> (безводный MgSO₄ ≈ 20 000)</li>
+      <li>Доза 0,3 % ≈ 80 · 0,5 % ≈ 130 · 1 % ≈ 260 сум/кг масла (+ потери масла)</li>
+      <li>Рабочая доза в бюджете 250–300 сум: <b>до ≈ 0,7–0,8 %</b></li>
+    </ul>
+  </div>
+  <div class="note">
+    <h3>Безопасность</h3>
+    <ul>
+      <li>Жидкое стекло — щёлочь: перчатки, очки</li>
+      <li>Кислоту лить в воду, не наоборот</li>
+      <li>Помол и просев — респиратор FFP2</li>
+      <li>Горячее масло 90–120 °C — не допускать попадания воды</li>
+    </ul>
+  </div>
+</div>
+<div class="tiny">Ориентиры: патенты Dallas Group US4681768, US5597600; MgO:SiO₂ = 1:2,6–3,4; FCC: MgO ≥ 15 %, SiO₂ ≥ 67 %, растворимые соли ≤ 3 %</div>
+
+</body>
+</html>
