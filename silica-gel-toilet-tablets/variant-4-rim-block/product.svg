@@ -1,0 +1,262 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1660" viewBox="0 0 1200 1660" font-family="'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1d2733"/></marker>
+<marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#0f5aa3"/></marker>
+<marker id="arrowWater" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#4d93c9"/></marker>
+<linearGradient id="barrierGrad" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#7fb7ea"/><stop offset="0.55" stop-color="#dff1f5"/><stop offset="1" stop-color="#dff1f5"/></linearGradient>
+</defs>
+<rect x="0" y="0" width="1200" height="1660" fill="#ffffff"/>
+<text x="30" y="48" font-size="28" fill="#1d2733" font-weight="700">Вариант 4. Синий картридж на ободке унитаза</text>
+<text x="30" y="76" font-size="15" fill="#5b6773">Гель силикагеля с красителем E133 в стаканчике с крышкой. Вода из лунки окрашивает каждый смыв — ровно 60 дней.</text>
+<rect x="20" y="100" width="560" height="500" rx="14" fill="#f7f9fb" stroke="#c9d2db" stroke-width="1.5"/>
+<circle cx="46" cy="128" r="15" fill="#1778d4"/>
+<text x="46" y="133" font-size="15" fill="#fff" font-weight="700" text-anchor="middle">1</text>
+<text x="70" y="134" font-size="18" fill="#1d2733" font-weight="700">Где стоит и что видно</text>
+<path d="M115 215 C 130 370, 220 460, 275 480 L365 480 C 440 460, 515 370, 525 215" fill="#f2f4f6" stroke="#7d8a96" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M190 420 C 225 458, 255 472, 275 477 L365 477 C 395 470, 420 455, 452 420 Z" fill="#bcdcf5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M190 420 L452 420" fill="none" stroke="#4d93c9" stroke-width="1.5" stroke-dasharray="5 4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="80" y="200" width="60" height="26" rx="10" fill="#f2f4f6" stroke="#7d8a96" stroke-width="2.5"/>
+<rect x="500" y="200" width="60" height="26" rx="10" fill="#f2f4f6" stroke="#7d8a96" stroke-width="2.5"/>
+<text x="530" y="190" font-size="12" fill="#5b6773" text-anchor="middle">ободок</text>
+<path d="M90 245 L90 190 Q 90 182, 100 182 L140 182 Q 152 182, 152 194 L152 254" fill="none" stroke="#3d4752" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="140" y="254" width="92" height="70" rx="5" fill="#fff" stroke="#3d4752" stroke-width="2.5"/>
+<path d="M163 302 L163 324" fill="none" stroke="#3d4752" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M186 302 L186 324" fill="none" stroke="#3d4752" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M209 302 L209 324" fill="none" stroke="#3d4752" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="151" y="272" width="69" height="23" fill="#dff1f5"/>
+<rect x="151" y="295" width="69" height="23" fill="#1778d4"/>
+<rect x="179.175" y="272" width="12.649999999999999" height="6.8999999999999995" fill="#d6ecfa"/>
+<rect x="179.175" y="272" width="12.649999999999999" height="6.8999999999999995" fill="#1778d4" opacity="0.8"/>
+<path d="M179.175 272 L179.175 278.9 L191.82500000000002 278.9 L191.82500000000002 272" fill="none" stroke="#7d8a96" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M151 270 L151 318 L220 318 L220 270" fill="none" stroke="#7d8a96" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="147" y="269.47" width="32.17500000000001" height="2.53" rx="2" fill="#5d6873"/>
+<rect x="191.82500000000002" y="269.47" width="32.17499999999999" height="2.53" rx="2" fill="#5d6873"/>
+<path d="M138 254 L160 240 L234 236" fill="none" stroke="#3d4752" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M138 230 C 155 232, 175 240, 183 262" fill="none" stroke="#4d93c9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowWater)"/>
+<path d="M142 236 C 165 236, 180 250, 192 262" fill="none" stroke="#4d93c9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowWater)"/>
+<path d="M220 326 C 225 370, 245 420, 285 460" fill="none" stroke="#1778d4" stroke-width="7" opacity="0.75" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M232 326 C 242 370, 265 415, 310 452" fill="none" stroke="#1778d4" stroke-width="4" opacity="0.45" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M92 236 L50 270" fill="none" stroke="#5b6773" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="92" cy="236" r="2.5" fill="#5b6773"/>
+<text x="54" y="288" font-size="12.5" fill="#1d2733" text-anchor="start">крючок</text>
+<text x="54" y="306" font-size="12.5" fill="#1d2733" text-anchor="start">с защёлкой</text>
+<path d="M225 280 L310 265" fill="none" stroke="#5b6773" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="225" cy="280" r="2.5" fill="#5b6773"/>
+<text x="316" y="260" font-size="13.5" fill="#1d2733" font-weight="600">картридж в корзинке</text>
+<text x="316" y="279" font-size="12.5" fill="#5b6773">60×40×40 мм, ~120 г</text>
+<path d="M165 234 L310 200" fill="none" stroke="#5b6773" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="165" cy="234" r="2.5" fill="#5b6773"/>
+<text x="316" y="196" font-size="12.5" fill="#1d2733">струя из-под ободка</text>
+<text x="316" y="214" font-size="12.5" fill="#1d2733">попадает в окно крышки</text>
+<path d="M248 400 L350 355" fill="none" stroke="#5b6773" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="248" cy="400" r="2.5" fill="#5b6773"/>
+<text x="356" y="344" font-size="13.5" fill="#0f5aa3" font-weight="600">синяя струя при смыве</text>
+<text x="356" y="362" font-size="13.5" fill="#0f5aa3" font-weight="600">~6 мг красителя</text>
+<path d="M350 450 L420 505" fill="none" stroke="#5b6773" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="350" cy="450" r="2.5" fill="#5b6773"/>
+<text x="350" y="522" font-size="12.5" fill="#1d2733">вода в колене слегка голубая (~1 мг/л)</text>
+<text x="44" y="552" font-size="13.5" fill="#1d2733">Картридж висит под ободком там, где сильнее всего бьёт вода. Каждый</text>
+<text x="44" y="571" font-size="13.5" fill="#1d2733">смыв промывает лунку — и синяя вода уходит в чашу.</text>
+<rect x="600" y="100" width="580" height="500" rx="14" fill="#f7f9fb" stroke="#c9d2db" stroke-width="1.5"/>
+<circle cx="626" cy="128" r="15" fill="#1778d4"/>
+<text x="626" y="133" font-size="15" fill="#fff" font-weight="700" text-anchor="middle">2</text>
+<text x="650" y="134" font-size="18" fill="#1d2733" font-weight="700">Что внутри картриджа (разрез)</text>
+<rect x="695" y="250" width="300" height="100" fill="#dff1f5"/>
+<rect x="695" y="350" width="300" height="100" fill="#1778d4"/>
+<rect x="817.5" y="250" width="55" height="30" fill="#d6ecfa"/>
+<rect x="817.5" y="250" width="55" height="30" fill="#1778d4" opacity="0.75"/>
+<path d="M817.5 250 L817.5 280 L872.5 280 L872.5 250" fill="none" stroke="#7d8a96" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M695 248 L695 450 L995 450 L995 248" fill="none" stroke="#7d8a96" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="691" y="239" width="126.5" height="11" rx="2" fill="#5d6873"/>
+<rect x="872.5" y="239" width="126.5" height="11" rx="2" fill="#5d6873"/>
+<path d="M683 250 L683 350" fill="none" stroke="#5b6773" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M683 350 L683 250" fill="none" stroke="#5b6773" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="677" y="304" font-size="12" fill="#5b6773" text-anchor="end">20 мм</text>
+<path d="M683 350 L683 450" fill="none" stroke="#5b6773" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M683 450 L683 350" fill="none" stroke="#5b6773" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="677" y="404" font-size="12" fill="#5b6773" text-anchor="end">20 мм</text>
+<path d="M695 468 L995 468" fill="none" stroke="#5b6773" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M995 468 L695 468" fill="none" stroke="#5b6773" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="845" y="486" font-size="12" fill="#5b6773" text-anchor="middle">60 мм (глубина 40 мм)</text>
+<path d="M845 282 L845 348" fill="none" stroke="#1d2733" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M845 348 L845 282" fill="none" stroke="#1d2733" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<text x="853" y="320" font-size="12.5" fill="#1d2733" font-weight="700">14 мм</text>
+<text x="845" y="224" font-size="12.5" fill="#1d2733" font-weight="700" text-anchor="middle">окно Ø11 мм</text>
+<path d="M845 230 L845 246" fill="none" stroke="#1d2733" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<path d="M985 244 L1017 232" fill="none" stroke="#5b6773" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="985" cy="244" r="2.5" fill="#5b6773"/>
+<text x="1023" y="228" font-size="12.5" fill="#1d2733">крышка — плотно</text>
+<text x="1023" y="244" font-size="12.5" fill="#1d2733">лежит на геле</text>
+<path d="M865 264 L1017 272" fill="none" stroke="#5b6773" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="865" cy="264" r="2.5" fill="#5b6773"/>
+<text x="1023" y="268" font-size="12.5" fill="#1d2733">лунка 0,6 мл —</text>
+<text x="1023" y="284" font-size="12.5" fill="#1d2733">тут копится синяя</text>
+<text x="1023" y="300" font-size="12.5" fill="#1d2733">вода</text>
+<path d="M955 320 L1017 330" fill="none" stroke="#5b6773" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="955" cy="320" r="2.5" fill="#5b6773"/>
+<text x="1023" y="326" font-size="12.5" fill="#1d2733">чистый гель —</text>
+<text x="1023" y="342" font-size="12.5" fill="#1d2733">барьер, задаёт</text>
+<text x="1023" y="358" font-size="12.5" fill="#1d2733">скорость</text>
+<path d="M955 400 L1017 400" fill="none" stroke="#5b6773" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="955" cy="400" r="2.5" fill="#5b6773"/>
+<text x="1023" y="396" font-size="12.5" fill="#0f5aa3" font-weight="600">гель + E133</text>
+<text x="1023" y="412" font-size="12.5" fill="#0f5aa3" font-weight="600">150 г/л (7,2 г) —</text>
+<text x="1023" y="428" font-size="12.5" fill="#0f5aa3" font-weight="600">запас на 60 дней</text>
+<path d="M995 446 L1017 456" fill="none" stroke="#5b6773" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="995" cy="446" r="2.5" fill="#5b6773"/>
+<text x="1023" y="460" font-size="12.5" fill="#1d2733">пищевой стакан ПП</text>
+<text x="624" y="520" font-size="13.5" fill="#1d2733">Краситель лежит внизу, далеко от воды. До лунки он идёт через 14 мм</text>
+<text x="624" y="539" font-size="13.5" fill="#1d2733">чистого геля — медленно и ровно. Мокнет только лунка: бока, дно и верх</text>
+<text x="624" y="558" font-size="13.5" fill="#1d2733">закрыты, гель не сохнет и не вымывается.</text>
+<rect x="20" y="620" width="1160" height="420" rx="14" fill="#f7f9fb" stroke="#c9d2db" stroke-width="1.5"/>
+<circle cx="46" cy="648" r="15" fill="#1778d4"/>
+<text x="46" y="653" font-size="15" fill="#fff" font-weight="700" text-anchor="middle">3</text>
+<text x="70" y="654" font-size="18" fill="#1d2733" font-weight="700">Как работает: один цикл между смывами (повторяется ~10 раз в сутки)</text>
+<rect x="50" y="686" width="262" height="290" rx="10" fill="#fff" stroke="#c9d2db" stroke-width="1.5"/>
+<circle cx="72" cy="710" r="13" fill="#fff" stroke="#1778d4" stroke-width="2"/>
+<text x="72" y="715" font-size="13" fill="#1778d4" font-weight="700" text-anchor="middle">1</text>
+<text x="92" y="715" font-size="15" fill="#1d2733" font-weight="700">Смыв</text>
+<rect x="95" y="771" width="180" height="60" fill="#dff1f5"/>
+<rect x="95" y="831" width="180" height="60" fill="#1778d4"/>
+<rect x="168.5" y="771" width="33" height="18" fill="#d6ecfa"/>
+<path d="M168.5 771 L168.5 789 L201.5 789 L201.5 771" fill="none" stroke="#7d8a96" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M95 769 L95 891 L275 891 L275 769" fill="none" stroke="#7d8a96" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="91" y="764.4" width="77.5" height="6.6000000000000005" rx="2" fill="#5d6873"/>
+<rect x="201.5" y="764.4" width="77.5" height="6.6000000000000005" rx="2" fill="#5d6873"/>
+<path d="M160 736 C 175 741, 182 748, 184 766" fill="none" stroke="#4d93c9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowWater)"/>
+<path d="M175 768 C 200 746, 235 748, 272 778" fill="none" stroke="#1778d4" stroke-width="4" opacity="0.85" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowBlue)"/>
+<text x="230" y="748" font-size="12" fill="#0f5aa3" font-weight="600">в чашу</text>
+<text x="66" y="924" font-size="13" fill="#1d2733">Струя заходит в окно и вымывает</text>
+<text x="66" y="942" font-size="13" fill="#1d2733">синюю воду из лунки в чашу.</text>
+<path d="M314 836 L328 836" fill="none" stroke="#1d2733" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="330" y="686" width="262" height="290" rx="10" fill="#fff" stroke="#c9d2db" stroke-width="1.5"/>
+<circle cx="352" cy="710" r="13" fill="#fff" stroke="#1778d4" stroke-width="2"/>
+<text x="352" y="715" font-size="13" fill="#1778d4" font-weight="700" text-anchor="middle">2</text>
+<text x="372" y="715" font-size="15" fill="#1d2733" font-weight="700">Сразу после</text>
+<rect x="375" y="771" width="180" height="60" fill="#dff1f5"/>
+<rect x="375" y="831" width="180" height="60" fill="#1778d4"/>
+<rect x="448.5" y="771" width="33" height="18" fill="#d6ecfa"/>
+<path d="M448.5 771 L448.5 789 L481.5 789 L481.5 771" fill="none" stroke="#7d8a96" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M375 769 L375 891 L555 891 L555 769" fill="none" stroke="#7d8a96" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="371" y="764.4" width="77.5" height="6.6000000000000005" rx="2" fill="#5d6873"/>
+<rect x="481.5" y="764.4" width="77.5" height="6.6000000000000005" rx="2" fill="#5d6873"/>
+<text x="346" y="924" font-size="13" fill="#1d2733">В лунке осталось 0,6 мл чистой</text>
+<text x="346" y="942" font-size="13" fill="#1d2733">воды.</text>
+<path d="M594 836 L608 836" fill="none" stroke="#1d2733" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="610" y="686" width="262" height="290" rx="10" fill="#fff" stroke="#c9d2db" stroke-width="1.5"/>
+<circle cx="632" cy="710" r="13" fill="#fff" stroke="#1778d4" stroke-width="2"/>
+<text x="632" y="715" font-size="13" fill="#1778d4" font-weight="700" text-anchor="middle">3</text>
+<text x="652" y="715" font-size="15" fill="#1d2733" font-weight="700">Через 1–2 часа</text>
+<rect x="655" y="771" width="180" height="60" fill="url(#barrierGrad)"/>
+<rect x="655" y="831" width="180" height="60" fill="#1778d4"/>
+<rect x="728.5" y="771" width="33" height="18" fill="#d6ecfa"/>
+<rect x="728.5" y="771" width="33" height="18" fill="#1778d4" opacity="0.35"/>
+<path d="M728.5 771 L728.5 789 L761.5 789 L761.5 771" fill="none" stroke="#7d8a96" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M655 769 L655 891 L835 891 L835 769" fill="none" stroke="#7d8a96" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="651" y="764.4" width="77.5" height="6.6000000000000005" rx="2" fill="#5d6873"/>
+<rect x="761.5" y="764.4" width="77.5" height="6.6000000000000005" rx="2" fill="#5d6873"/>
+<path d="M715.3 835 L718.9 797" fill="none" stroke="#0f5aa3" stroke-width="2" stroke-dasharray="4 4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowBlue)"/>
+<path d="M745 835 L745 797" fill="none" stroke="#0f5aa3" stroke-width="2" stroke-dasharray="4 4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowBlue)"/>
+<path d="M774.7 835 L771.1 797" fill="none" stroke="#0f5aa3" stroke-width="2" stroke-dasharray="4 4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowBlue)"/>
+<text x="626" y="924" font-size="13" fill="#1d2733">Краситель медленно идёт из запаса</text>
+<text x="626" y="942" font-size="13" fill="#1d2733">через барьер в воду лунки.</text>
+<path d="M874 836 L888 836" fill="none" stroke="#1d2733" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="890" y="686" width="262" height="290" rx="10" fill="#fff" stroke="#c9d2db" stroke-width="1.5"/>
+<circle cx="912" cy="710" r="13" fill="#fff" stroke="#1778d4" stroke-width="2"/>
+<text x="912" y="715" font-size="13" fill="#1778d4" font-weight="700" text-anchor="middle">4</text>
+<text x="932" y="715" font-size="15" fill="#1d2733" font-weight="700">Перед следующим смывом</text>
+<rect x="935" y="771" width="180" height="60" fill="url(#barrierGrad)"/>
+<rect x="935" y="831" width="180" height="60" fill="#1778d4"/>
+<rect x="1008.5" y="771" width="33" height="18" fill="#d6ecfa"/>
+<rect x="1008.5" y="771" width="33" height="18" fill="#1778d4" opacity="0.85"/>
+<path d="M1008.5 771 L1008.5 789 L1041.5 789 L1041.5 771" fill="none" stroke="#7d8a96" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M935 769 L935 891 L1115 891 L1115 769" fill="none" stroke="#7d8a96" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="931" y="764.4" width="77.5" height="6.6000000000000005" rx="2" fill="#5d6873"/>
+<rect x="1041.5" y="764.4" width="77.5" height="6.6000000000000005" rx="2" fill="#5d6873"/>
+<text x="906" y="924" font-size="13" fill="#1d2733">Вода в лунке синяя: ~6 мг</text>
+<text x="906" y="942" font-size="13" fill="#1d2733">красителя (~10 г/л). Смыв — и всё</text>
+<text x="906" y="960" font-size="13" fill="#1d2733">сначала.</text>
+<path d="M1021 978 L1021 1004 L181 1004 L181 982" fill="none" stroke="#5b6773" stroke-width="1.5" stroke-dasharray="5 5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow)"/>
+<rect x="540" y="994" width="120" height="20" fill="#f7f9fb"/>
+<text x="600" y="1008" font-size="12" fill="#5b6773" text-anchor="middle">следующий смыв</text>
+<rect x="20" y="1060" width="680" height="420" rx="14" fill="#f7f9fb" stroke="#c9d2db" stroke-width="1.5"/>
+<circle cx="46" cy="1088" r="15" fill="#1778d4"/>
+<text x="46" y="1093" font-size="15" fill="#fff" font-weight="700" text-anchor="middle">4</text>
+<text x="70" y="1094" font-size="18" fill="#1d2733" font-weight="700">Почему именно так: краситель за смыв, мг</text>
+<rect x="90" y="1278" width="560" height="46" fill="#e3f1e8"/>
+<text x="644" y="1292" font-size="12" fill="#2e8b57" font-weight="600" text-anchor="end">нужно: ~4–8 мг</text>
+<path d="M90 1370 L650 1370" fill="none" stroke="#e3e7eb" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="82" y="1374" font-size="12" fill="#5b6773" text-anchor="end">0</text>
+<path d="M90 1312.5 L650 1312.5" fill="none" stroke="#e3e7eb" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="82" y="1316.5" font-size="12" fill="#5b6773" text-anchor="end">5</text>
+<path d="M90 1255 L650 1255" fill="none" stroke="#e3e7eb" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="82" y="1259" font-size="12" fill="#5b6773" text-anchor="end">10</text>
+<path d="M90 1197.5 L650 1197.5" fill="none" stroke="#e3e7eb" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="82" y="1201.5" font-size="12" fill="#5b6773" text-anchor="end">15</text>
+<path d="M90 1140 L650 1140" fill="none" stroke="#e3e7eb" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="82" y="1144" font-size="12" fill="#5b6773" text-anchor="end">20</text>
+<text x="90" y="1388" font-size="12" fill="#5b6773" text-anchor="middle">0</text>
+<text x="155.33333333333331" y="1388" font-size="12" fill="#5b6773" text-anchor="middle">7</text>
+<text x="220.66666666666666" y="1388" font-size="12" fill="#5b6773" text-anchor="middle">14</text>
+<text x="370" y="1388" font-size="12" fill="#5b6773" text-anchor="middle">30</text>
+<text x="510" y="1388" font-size="12" fill="#5b6773" text-anchor="middle">45</text>
+<text x="650" y="1388" font-size="12" fill="#5b6773" text-anchor="middle">60</text>
+<text x="370" y="1408" font-size="12" fill="#5b6773" text-anchor="middle">дни</text>
+<path d="M90 1370 L650 1370" fill="none" stroke="#7d8a96" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M99.33333333333333 1140 L155.3 1174.5 L220.7 1360.8 L370.0 1370.0 L510.0 1370.0 L650.0 1370.0" fill="none" stroke="#eb6834" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M99.33333333333333 1136 L99.33333333333333 1140" fill="none" stroke="#eb6834" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="155.33333333333331" cy="1174.5" r="4" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="220.66666666666666" cy="1360.8" r="4" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="370" cy="1370" r="4" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="510" cy="1370" r="4" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<circle cx="650" cy="1370" r="4" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<text x="105.33333333333333" y="1130" font-size="12" fill="#1d2733">▲ 1-й день: 853 мг — выше шкалы, вода «чернильная»</text>
+<text x="232.66666666666666" y="1358" font-size="12.5" fill="#1d2733" font-weight="600">открытый брусок: к 14-му дню почти пусто</text>
+<path d="M99.3 1298.7 L108.7 1305.6 L118.0 1299.8 L155.3 1283.8 L220.7 1278.0 L370.0 1290.7 L510.0 1305.6 L650.0 1317.1" fill="none" stroke="#2a78d6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="99.33333333333333" cy="1298.7" r="4" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<circle cx="108.66666666666667" cy="1305.6" r="4" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<circle cx="118" cy="1299.85" r="4" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<circle cx="155.33333333333331" cy="1283.75" r="4" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<circle cx="220.66666666666666" cy="1278" r="4" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<circle cx="370" cy="1290.65" r="4" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<circle cx="510" cy="1305.6" r="4" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<circle cx="650" cy="1317.1" r="4" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<text x="370" y="1278.65" font-size="12.5" fill="#1d2733" font-weight="600" text-anchor="middle">картридж: 4,6–8 мг все 60 дней</text>
+<rect x="90" y="1427" width="18" height="3" fill="#2a78d6"/>
+<circle cx="99" cy="1428.5" r="4" fill="#2a78d6" stroke="#fff" stroke-width="2"/>
+<text x="116" y="1433" font-size="12.5" fill="#1d2733">картридж (стакан + крышка + барьер)</text>
+<rect x="390" y="1427" width="18" height="3" fill="#eb6834"/>
+<circle cx="399" cy="1428.5" r="4" fill="#eb6834" stroke="#fff" stroke-width="2"/>
+<text x="416" y="1433" font-size="12.5" fill="#1d2733">брусок с красителем везде, открыт</text>
+<text x="90" y="1458" font-size="11.5" fill="#5b6773">Расчёт по модели rim_model.js: брусок 60×40×40 мм, E133 150 г/л, 10 смывов в сутки, ~20 °C.</text>
+<rect x="720" y="1060" width="460" height="420" rx="14" fill="#f7f9fb" stroke="#c9d2db" stroke-width="1.5"/>
+<circle cx="746" cy="1088" r="15" fill="#1778d4"/>
+<text x="746" y="1093" font-size="15" fill="#fff" font-weight="700" text-anchor="middle">5</text>
+<text x="770" y="1094" font-size="18" fill="#1d2733" font-weight="700">Как пользоваться</text>
+<circle cx="760" cy="1140" r="13" fill="#eef5fc" stroke="#1778d4" stroke-width="1.5"/>
+<text x="760" y="1145" font-size="13" fill="#1778d4" font-weight="700" text-anchor="middle">1</text>
+<text x="784" y="1145" font-size="13.5" fill="#1d2733">Снять скотч с окна, вставить картридж в</text>
+<text x="784" y="1163" font-size="13.5" fill="#1d2733">держатель до щелчка, повесить окном вверх.</text>
+<circle cx="760" cy="1206" r="13" fill="#eef5fc" stroke="#1778d4" stroke-width="1.5"/>
+<text x="760" y="1211" font-size="13" fill="#1778d4" font-weight="700" text-anchor="middle">2</text>
+<text x="784" y="1211" font-size="13.5" fill="#1d2733">Первый смыв наполнит лунку, через 1–2 ч вода в</text>
+<text x="784" y="1229" font-size="13.5" fill="#1d2733">ней посинеет.</text>
+<circle cx="760" cy="1272" r="13" fill="#eef5fc" stroke="#1778d4" stroke-width="1.5"/>
+<text x="760" y="1277" font-size="13" fill="#1778d4" font-weight="700" text-anchor="middle">3</text>
+<text x="784" y="1277" font-size="13.5" fill="#1d2733">Уезжаете больше чем на 3 дня — заклейте окно</text>
+<text x="784" y="1295" font-size="13.5" fill="#1d2733">скотчем.</text>
+<circle cx="760" cy="1338" r="13" fill="#eef5fc" stroke="#1778d4" stroke-width="1.5"/>
+<text x="760" y="1343" font-size="13" fill="#1778d4" font-weight="700" text-anchor="middle">4</text>
+<text x="784" y="1343" font-size="13.5" fill="#1d2733">Менять через 60 дней (можно держать до ~90,</text>
+<text x="784" y="1361" font-size="13.5" fill="#1d2733">цвет слабее).</text>
+<circle cx="760" cy="1404" r="13" fill="#eef5fc" stroke="#1778d4" stroke-width="1.5"/>
+<text x="760" y="1409" font-size="13" fill="#1778d4" font-weight="700" text-anchor="middle">5</text>
+<text x="784" y="1409" font-size="13.5" fill="#1d2733">До установки: не дольше 7 дней от заливки, в</text>
+<text x="784" y="1427" font-size="13.5" fill="#1d2733">темноте, окно заклеено.</text>
+<rect x="20" y="1500" width="1160" height="130" rx="14" fill="#eef5fc"/>
+<text x="40" y="1532" font-size="17" fill="#1d2733" font-weight="700">Главная идея</text>
+<text x="40" y="1560" font-size="14" fill="#1d2733">Скорость задаёт не лунка, а слой чистого геля между запасом красителя и водой. Лунка — только «ведёрко»,</text>
+<text x="40" y="1581" font-size="14" fill="#1d2733">в которое краситель собирается между смывами. Ночью вода в лунке насыщается, и выход сам замедляется —</text>
+<text x="40" y="1602" font-size="14" fill="#1d2733">поэтому утром нет «чернильного» смыва.</text>
+<text x="30" y="1650" font-size="12.5" fill="#b35c00" font-weight="600">Изготовление: силикат — в кислоту, кислоту — в воду, очки и перчатки. Подробности — README варианта 4.</text>
+</svg>
