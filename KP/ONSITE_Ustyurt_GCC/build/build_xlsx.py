@@ -78,6 +78,8 @@ for r in D.items():
         ws[f"L{row}"] = r["maker"]
     if r["price"] is not None:
         ws[f"O{row}"] = r["price"]
+        if r.get("prefix"):
+            ws[f"T{row}"] = "Цена указана «от»; окончательная стоимость уточняется / Price stated as minimum, to be confirmed"
     if r["unit"] in ("кг", "шт."):
         ws[f"Q{row}"] = "Еврокуб 1 м³ (невозвратный)" if r["unit"] == "кг" else "Коробка, индивид. маркировка"
         ws[f"R{row}"] = D.LEAD_TIME_DAYS

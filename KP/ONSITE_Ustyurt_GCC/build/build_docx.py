@@ -82,7 +82,7 @@ for t in body:
     p.paragraph_format.first_line_indent = Cm(1.25)
 
 # --- Таблица ---
-widths = [Cm(1.1), Cm(6.4), Cm(2.4), Cm(1.4), Cm(2.0), Cm(2.2), Cm(2.5)]
+widths = [Cm(1.1), Cm(5.4), Cm(2.2), Cm(1.4), Cm(1.9), Cm(2.6), Cm(3.1)]
 hdr = ["#", "Наименование", "Упак.", "Ед.", "Кол-во", "Цена, сум", "ИТОГО, сум"]
 tbl = doc.add_table(rows=0, cols=7)
 tbl.style = "Table Grid"; tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
@@ -113,7 +113,7 @@ def money(x):
 
 
 fill(tbl.add_row().cells, hdr, bold=True, size=10.5)
-total, missing = 0, False
+total, missing, prefixed = 0, False, False
 for title, rows in D.SECTIONS:
     row = tbl.add_row(); m = row.cells[0].merge(row.cells[6])
     fill([m], [title], bold=True, size=10); shade(m, "F2F2F2")
@@ -126,11 +126,12 @@ for title, rows in D.SECTIONS:
         if r["price"] is None:
             missing = True; price, amount = BLANK, BLANK
         else:
-            total += q * r["price"]; price, amount = money(r["price"]), money(q * r["price"])
+            pre = r.get("prefix", ""); prefixed = prefixed or bool(pre)
+            total += q * r["price"]; price, amount = pre + money(r["price"]), pre + money(q * r["price"])
         hl = (5, 6) if r["price"] is None else ()
         fill(tbl.add_row().cells, [r["no"] + ".", r["name"], r["pack"], r["unit"], money(q), price, amount],
              right=(4, 5, 6), hl=hl)
-fill(tbl.add_row().cells, ["", "ИТОГО:", "", "", "", "", BLANK if missing else money(total)],
+fill(tbl.add_row().cells, ["", "ИТОГО:", "", "", "", "", BLANK if missing else ("от " if prefixed else "") + money(total)],
      bold=True, right=(6,), hl=(6,) if missing else ())
 for row in tbl.rows:
     for i, c in enumerate(row.cells):
@@ -161,8 +162,7 @@ conds = [
 ]
 for k, v in conds:
     p = para(); runs(p, [(k, False), (v, False)])
-para("Приложение: заполненная форма запроса ценового предложения (листы «Цены», «Условия», «Расчёт»).",
-     before=6, after=14)
+para("", after=8)
 
 sig = ["С Уважением,", "Директор ООО “ONSITE”", D.COMPANY["director"], "Тел.: " + D.COMPANY["phone"]]
 if stamp:
